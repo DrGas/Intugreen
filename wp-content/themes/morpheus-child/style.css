@@ -1,0 +1,33 @@
+/*
+Theme Name: morpehus-child
+Description: morpheus child theme
+Template: morpheus
+License: GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+h1 {
+    color: white;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+	font-weight: normal;}
+
+strong, b {
+	font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+	color: white;
+}
+
+button {
+	background-color: transparent;
+	border: 2px #007465 solid;
+	
+}
+
+button:hover {
+	background-color: #007465;
+	border: 2px #007465 solid;
+
+}
