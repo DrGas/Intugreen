@@ -16,6 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;}
 
 p {
+	font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 	color: #38393d;
 }
 
@@ -28,6 +29,36 @@ p {
 	color: #38393d;
 }
 
+
+.par {
+	color: white;
+}
+
+.button-science {
+	margin-top: 50px;
+	padding: 10px 40px;
+}
+
+.button-read-more {
+	padding: 10px 40px;
+}
+
+.row-icons {
+	margin: 0 auto;
+    display: block;
+
+	background-color: green;
+	width: 50%;
+}
+
+.kontakt-icons {
+	margin: 0 auto;
+	background-color: blue;
+}
+
+/*.row-icons {
+	padding-left: 100px;
+}*/
 /*button {
 	background-color: transparent;
 	border: 2px #007465 solid;
@@ -105,6 +136,11 @@ margin-right: 100px;
 .wp-image-376 {
 }
 
+/*Om Os vores kontor img*/
+.wp-image-21 {
+	padding-right: 30px;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
@@ -112,13 +148,15 @@ margin-right: 100px;
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-	.wp-image-376 { 
-
-	}
+	/*.row-icons {
+		padding-left:20px;}*/
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+/*	.row-icons {
+		padding-left:70px;}
+} */
 
 } 
 
@@ -128,7 +166,11 @@ margin-right: 100px;
 	.om-os{
 		margin-top: 150px;
 	}
-} 
+/*
+.row-icons {
+	background-color: purple;
+		padding-left:20px;}
+} */
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {...}
