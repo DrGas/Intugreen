@@ -7,20 +7,28 @@ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 h1 {
-    color: white;
+    /*color: white;*/
 }
 
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-family: "Prata", "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 	font-weight: normal;}
 
-strong, b {
+p {
+	color: #38393d;
+}
+
+#yui_3_17_2_1_1529486280796_886 {
 	font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 	color: white;
 }
 
-button {
+.title {
+	color: #38393d;
+}
+
+/*button {
 	background-color: transparent;
 	border: 2px #007465 solid;
 	
@@ -30,4 +38,99 @@ button:hover {
 	background-color: #007465;
 	border: 2px #007465 solid;
 
+	.button-read-more {
+	background: pink;
 }
+
+}*/
+
+
+/* icons e-learning margin */
+.intugreen-headline {
+	color: white;
+	margin-top: 40px;
+	font-size: 50px;
+}
+
+
+/* icons e-learning margin */
+
+.elearning-icon {
+	margin-right: 10px;
+}
+.wp-image-211 {
+	margin-right: 100px;
+}
+.wp-image-207 {
+	margin-right: 100px;
+
+}
+
+.wp-image-208 {
+	margin-right: 100px;
+}
+
+/* icons business margin */
+
+
+.wp-image-270 {
+	margin-right: 100px;
+}
+
+.wp-image-271 {
+	margin-right: 100px;
+
+}
+
+.wp-image-133 {margin: 0;}
+
+a img.alignnone {
+	margin:0;
+}
+/*ByNature icons*/
+.wp-image-360 {
+margin-right: 100px;
+}
+.wp-image-359 {margin-right: 100px;}
+.wp-image-358 {margin-right: 100px;}
+
+/*Om Os text*/
+
+.text-om-os {
+	margin-right: 50px;
+	margin-left: 10px;
+}
+
+/*Om Os big img*/
+.wp-image-376 {
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	.wp-image-376 { 
+
+	}
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+	.om-os{
+		margin-top: 150px;
+	}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
+
+
