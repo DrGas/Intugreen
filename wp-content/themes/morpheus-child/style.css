@@ -6,18 +6,16 @@ License: GNU General Public License v2 or later
 License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-h1 {
-    /*color: white;*/
-}
-
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Prata", "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-	font-weight: normal;}
+	font-weight: normal;
+	color: #38393d;}
 
 p {
 	font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 	color: #38393d;
+	font-weight: lighter;
 }
 
 #yui_3_17_2_1_1529486280796_886 {
@@ -41,6 +39,27 @@ p {
 
 .button-read-more {
 	padding: 10px 40px;
+	
+}
+
+.button-center {
+	padding: 10px 40px;
+	display: table;
+    margin-left: auto;
+    margin-right: auto 
+}
+
+.button-center-app-store {
+	padding: 10px 50px;
+	display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-btb {
+	margin-top: 24px;
+	
+
 }
 
 .row-icons {
@@ -55,6 +74,8 @@ p {
 	margin: 0 auto;
 	background-color: blue;
 }
+
+
 
 /*.row-icons {
 	padding-left: 100px;
@@ -79,7 +100,7 @@ button:hover {
 /* icons e-learning margin */
 .intugreen-headline {
 	color: white;
-	margin-top: 40px;
+	margin-top: 80px;
 	font-size: 50px;
 }
 
@@ -141,6 +162,23 @@ margin-right: 100px;
 	padding-right: 30px;
 }
 
+/*Dowload App Nav*/
+#menu-item-515 {
+	border: 1px solid #007465;
+	/*margin-left: 100px;*/
+	}
+
+
+.center-heading {
+	color: white;
+}
+
+.video-mission {
+
+}
+
+/*MEDIA QUERIES*/
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
@@ -150,6 +188,8 @@ margin-right: 100px;
 @media only screen and (min-width: 600px) {
 	/*.row-icons {
 		padding-left:20px;}*/
+
+		.contact-form {margin-right: 100px;}
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
