@@ -13,3 +13,6 @@ function my_theme_enqueue_styles() {
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles' ); 
 ?>
+<?php 
+wp_enqueue_script("jquery");
+?>

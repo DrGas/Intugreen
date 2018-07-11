@@ -147,10 +147,14 @@ margin-right: 100px;
 .wp-image-358 {margin-right: 100px;}
 
 
-/*Vi tilbyder*/
+/*Vi tilbyder
 .wp-image-99 {
-	border: red 2px solid;
+	padding: 0 20px;
 }
+
+.wp-image-566 {
+	padding: 0 20px;
+}*/
 
 /*Om Os text*/
 
@@ -168,11 +172,11 @@ margin-right: 100px;
 	padding-right: 30px;
 }
 
-/*Dowload App Nav*/
+/*Dowload App Nav
 #menu-item-515 {
-	border: 1px solid #007465;
+	border: 1px solid #007465;}
 	/*margin-left: 100px;*/
-	}
+	
 
 
 .center-heading {
@@ -188,21 +192,31 @@ margin-right: 100px;
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
+/*
+.parallax-slider .overlay {
+transform: none !important;
+}
+
+.parallax-slider-img.obj-inner {
+background-size: 100% auto !important;
+}
+
+.parallax-slider {
+height: 721px !important;
+}*/
+
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-	/*.row-icons {
-		padding-left:20px;}*/
+	
 
 		.contact-form {margin-right: 100px;}
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-/*	.row-icons {
-		padding-left:70px;}
-} */
+
 
 } 
 
