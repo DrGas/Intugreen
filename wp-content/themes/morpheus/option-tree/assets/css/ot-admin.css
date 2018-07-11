@@ -2503,9 +2503,9 @@ select.option-tree-ui-select option {
 .option-tree-ui-colorpicker-input-wrap {
   float: left;
 }
-.hide-color-picker {
+/*.hide-color-picker {
   display: none;
-}
+}*/
 .option-tree-ui-colorpicker-input-wrap .option-tree-ui-colorpicker-label {
   height: 30px;
   line-height: 30px;
