@@ -331,6 +331,10 @@ label{
   margin-bottom: 7px;
 }
 
+.pbp_form hr {
+  border-color: #f3f3f3 !important; 
+}
+
 .wdt-fields{
   margin-left: 
 }
@@ -1303,7 +1307,7 @@ audio::-webkit-media-controls-panel {
 
 
 
-#PB_accordion h4, #PB_accordion > div, .PB_accordion h4, .PB_accordion > div {
+#PB_accordion h4, #PB_accordion > div, .PB_accordion > div {
   margin:0;
   background:#F1F5F9;
   color: #737e89;
@@ -1842,7 +1846,7 @@ div{
 .goProButton {
     display: block;
     height: 27px;
-    width: 140px;
+    width: 150px;
     background: #FF9800;
     color: #fff;
     float: left;
@@ -1850,7 +1854,7 @@ div{
     margin-left: 12px;
     margin-right: 20px;
     padding-top: 7px;
-    font-size: 14px;
+    font-size: 13px;
 }
 .goProButton:hover{
   background: #f39f22;

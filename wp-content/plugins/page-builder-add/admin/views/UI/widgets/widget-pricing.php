@@ -157,7 +157,7 @@
             <br>
             <hr>
             <br>
-            <label>Border Radius:</label>
+            <label>Corner Radius:</label>
             <input type="number" class="pricingbtnBorderRadius" max="100" min="0">
             <br>
             <br>

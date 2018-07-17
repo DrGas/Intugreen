@@ -474,12 +474,12 @@ if ( is_plugin_active('page-builder-add-global-row-extension/page-builder-add-gl
   jQuery(document).on('change','.formFieldItemsContainer input',function(){
     jQuery('.closeWidgetPopup').click();
   });
-  jQuery(document).on('keyup','.formFieldItemsContainer textarea',function(){
+  jQuery(document).on('change','.formFieldItemsContainer textarea',function(){
     jQuery('.closeWidgetPopup').click();
   });
 
 
-  jQuery('.editWidgetSaveButton').click( function(){
+    jQuery('.editWidgetSaveButton').click( function(){
     jQuery('.closeWidgetPopup').click();
     jQuery('.columnWidgetPopup').hide("slide", { direction: "left" }, 500);
     jQuery('.edit_column').hide("slide", { direction: "left" }, 500);
@@ -792,7 +792,11 @@ String.prototype.PBSearchStrcapitalize = function() {
 
           <?php
             if ( is_plugin_active('PluginOps-Extensions-Pack/extension-pack.php') ) {
-              echo "var isProActive = 'true';";
+              if (function_exists('ULPB_formBuilder_database_renderFormDataTable') ) {
+                echo "var isProActive = 'true';";
+              }else{
+                echo "var isProActive = 'false';";
+              }
             }else{
               echo "var isProActive = 'false';";
             }
@@ -865,6 +869,11 @@ String.prototype.PBSearchStrcapitalize = function() {
                 },
                 14:{
                     tempname : 14,
+                    tempCat:'Pricing',
+                    isPro:true,
+                },
+                15:{
+                    tempname : 15,
                     tempCat:'Pricing',
                     isPro:true,
                 },

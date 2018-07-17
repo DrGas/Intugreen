@@ -137,7 +137,9 @@ $('.updateTemplate').live('click', function () {
 	   		case 'temp32':
 	   			var pageOptions = '{"setFrontPage":"false","loadWpHead":"false","loadWpFooter":"false","pageBgImage":"","pageBgColor":"transparent","pageLink":"'+pageLink+'","pagePadding":{"pagePaddingTop":"","pagePaddingBottom":"","pagePaddingLeft":"","pagePaddingRight":""},"pagePaddingTablet":{"pagePaddingTopTablet":"","pagePaddingBottomTablet":"","pagePaddingLeftTablet":"","pagePaddingRightTablet":""},"pagePaddingMobile":{"pagePaddingTopMobile":"","pagePaddingBottomMobile":"","pagePaddingLeftMobile":"","pagePaddingRightMobile":""},"pageSeoName":"'+pageSeoName+'","pageSeoDescription":"","pageSeoKeywords":"","pageLogoUrl":"","pageFavIconUrl":"","VariantB_ID":null,"POcustomCSS":".temp-22-sub-form input {\\n    border:none !important;\\n    border-bottom:1px solid #00C2A6 !important;\\n}","POcustomJS":"\\/* Add your custom Javascript here.*\\/","POPBDefaults":{"POPBDefaultsEnable":"false","POPB_typefaces":{"typefaceHOne":"Arial","typefaceHTwo":"Arial","typefaceParagraph":"Arial","typefaceButton":"Arial","typefaceAnchorLink":"Arial"},"POPB_typeSizes":{"typeSizeHOne":"45","typeSizeHTwo":"29","typeSizeParagraph":"15","typeSizeButton":"16","typeSizeAnchorLink":"15","typeSizeHOneTablet":"","typeSizeHOneMobile":"","typeSizeHTwoTablet":"","typeSizeHTwoMobile":"","typeSizeParagraphTablet":"","typeSizeParagraphMobile":"","typeSizeButtonTablet":"","typeSizeButtonMobile":"","typeSizeAnchorLinkTablet":"","typeSizeAnchorLinkMobile":""}}}';
 	   		break;
-
+	   		case 'temp34':
+	   			var pageOptions = '{"setFrontPage":"false","loadWpHead":"false","loadWpFooter":"false","pageBgImage":"","pageBgColor":"#f5f5f5","pageLink":"template-34","pagePadding":{"pagePaddingTop":"","pagePaddingBottom":"","pagePaddingLeft":"","pagePaddingRight":""},"pagePaddingTablet":{"pagePaddingTopTablet":"","pagePaddingBottomTablet":"","pagePaddingLeftTablet":"","pagePaddingRightTablet":""},"pagePaddingMobile":{"pagePaddingTopMobile":"","pagePaddingBottomMobile":"","pagePaddingLeftMobile":"","pagePaddingRightMobile":""},"pageSeoName":"Template #34","pageSeoDescription":"","pageSeoKeywords":"","pageLogoUrl":"","pageFavIconUrl":"","VariantB_ID":null,"POcustomCSS":"","POcustomJS":"/* Add your custom Javascript here.*/","POPBDefaults":{"POPBDefaultsEnable":"false","POPB_typefaces":{"typefaceHOne":"Arial","typefaceHTwo":"Arial","typefaceParagraph":"Arial","typefaceButton":"Arial","typefaceAnchorLink":"Arial"},"POPB_typeSizes":{"typeSizeHOne":"45","typeSizeHTwo":"29","typeSizeParagraph":"15","typeSizeButton":"16","typeSizeAnchorLink":"15","typeSizeHOneTablet":"","typeSizeHOneMobile":"","typeSizeHTwoTablet":"","typeSizeHTwoMobile":"","typeSizeParagraphTablet":"","typeSizeParagraphMobile":"","typeSizeButtonTablet":"","typeSizeButtonMobile":"","typeSizeAnchorLinkTablet":"","typeSizeAnchorLinkMobile":""}}}';
+	   		break;
 
 	   		case 'temp105':
 	   			var pageOptions = '{"loadWpHead":"false","loadWpFooter":"true","pageBgImage":"","pageBgColor":" ","pageLink":"'+pageLink+'","pagePadding":{"pagePaddingTop":"0","pagePaddingBottom":"0","pagePaddingLeft":"0","pagePaddingRight":"0"},"pageSeoName":"'+pageSeoName+'","pageSeoDescription":"","pageSeoKeywords":""}';
@@ -155,11 +157,11 @@ $('.updateTemplate').live('click', function () {
 	   			var pageOptions = '{"loadWpHead":"false","loadWpFooter":"false","pageBgImage":"","pageBgColor":"transparent","pageLink":"'+pageLink+'","pagePadding":{"pagePaddingTop":"","pagePaddingBottom":"","pagePaddingLeft":"","pagePaddingRight":""},"pagePaddingTablet":{"pagePaddingTopTablet":"","pagePaddingBottomTablet":"","pagePaddingLeftTablet":"","pagePaddingRightTablet":""},"pagePaddingMobile":{"pagePaddingTopMobile":"","pagePaddingBottomMobile":"","pagePaddingLeftMobile":"","pagePaddingRightMobile":""},"pageSeoName":"'+pageSeoName+'","pageSeoDescription":"","pageSeoKeywords":"","pageLogoUrl":"","pageFavIconUrl":"","VariantB_ID":null,"POcustomCSS":"/* Add your custom CSS here.*/","POcustomJS":"/* Add your custom Javascript here.*/","POPBDefaults":{"POPBDefaultsEnable":"true","POPB_typefaces":{"typefaceHOne":"Arial","typefaceHTwo":"Arial","typefaceParagraph":"Arial","typefaceButton":"Arial","typefaceAnchorLink":"Arial"},"POPB_typeSizes":{"typeSizeHOne":"34","typeSizeHTwo":"22","typeSizeParagraph":"13","typeSizeButton":"14","typeSizeAnchorLink":"15","typeSizeHOneTablet":"","typeSizeHOneMobile":"","typeSizeHTwoTablet":"","typeSizeHTwoMobile":"","typeSizeParagraphTablet":"","typeSizeParagraphMobile":"","typeSizeButtonTablet":"","typeSizeButtonMobile":"","typeSizeAnchorLinkTablet":"","typeSizeAnchorLinkMobile":""}}}';
 	   		break;
 	   		default: 
-	   		alert('No template selected');
+	   		
 	   		break;
 	   	}
 
-
+	   	pageOptionsNeedToParse = 'true';
 	   	var model = '';
 		$.ajax({
 		  type: 'GET',
@@ -168,6 +170,15 @@ $('.updateTemplate').live('click', function () {
 		  data: { get_param: 'value' },
 		  success: function( data ) {
 	   		model = data;
+	   		if (pageOptions == "") {
+	   			if ( typeof(model['pageOptions']) != 'undefined' ) {
+	   				pageOptions = model['pageOptions'];
+	   				pageOptionsNeedToParse = 'false';
+	   			}
+	   			if ( typeof(model['Rows']) != 'undefined' ) {
+	   				model = model['Rows'];
+	   			}
+	   		}
 		  },
 		  error: function( xhr, ajaxOptions, thrownError ) {
 	   		alert('Some Error Occurred');
@@ -181,7 +192,16 @@ $('.updateTemplate').live('click', function () {
 			pageBuilderApp.PageBuilderModel.set( 'Rows', model );
 		    pageBuilderApp.PageBuilderModel.set( 'pageStatus', PbPageStatus );
 		    if (pageOptions !== "") {
-		    	pageBuilderApp.PageBuilderModel.set( 'pageOptions', JSON.parse(pageOptions) );
+		    	if (pageOptionsNeedToParse == 'true') {
+		    		parsedPageOptions = JSON.parse(pageOptions);
+		    	}else{
+		    		parsedPageOptions = pageOptions;
+		    	}
+
+		    	parsedPageOptions['pageLink'] = pageLink;
+		    	parsedPageOptions['pageSeoName'] = pageSeoName;
+
+		    	pageBuilderApp.PageBuilderModel.set( 'pageOptions', parsedPageOptions );
 		    }
 		    var savedPageID = pageBuilderApp.PageBuilderModel.get('pageID');
 		    if (P_ID !== savedPageID ) {

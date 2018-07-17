@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
   $formBuilderFieldSize = 'pbField-'.$widgetPbFbFormFeildOptions['formBuilderFieldSize'];
 
-  $formBuilderFieldVGap = ''; $formBuilderFieldHGap = '2.5'; 
+  $formBuilderFieldVGap = ''; $formBuilderFieldHGap = '2.5';
   if (isset($widgetPbFbFormFeildOptions['formBuilderFieldVGap']) ) {
     
     if ($widgetPbFbFormFeildOptions['formBuilderFieldVGap'] != '') {
@@ -60,7 +60,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
           });
           </script> " ;
       }
-      $widgetFALoadScripts = true;
     } else {
       $formBuilderbtnIcon = '';
     }
@@ -84,7 +83,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     $widgetPbFbFormFeildOptions['formBuilderFieldFontFamily'] = ' ';
   }
 
-
+  $widgetFALoadScripts = true;
   ob_start();
 
   $widgetPbFbFormFeildsIndex = 0;
@@ -96,7 +95,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
       $fbFieldRequired = 'required="required"';
     }
     $thisFieldAttr = 'style="width:99%;  "  placeholder="'.$thisFieldOptions['fbFieldPlaceHolder'].'" '.$fbFieldRequired.' "  id="fieldID-'.$widgetPbFbFormFeildsIndex.'" ' ;
-    $multiFieldStyleAttr = 'style="margin-right:25px; display:'.$thisFieldOptions['displayFieldsInline'].'; line-height:2em; font-size:16px; "';
+    $multiFieldStyleAttr = 'style="margin-right:25px; display:'.$thisFieldOptions['displayFieldsInline'].'; line-height:1.4em; "';
     $thisFieldName = $thisFieldOptions['fbFieldLabel'];
 
     if ($thisFieldName == '') {
@@ -113,8 +112,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
            $allRadioItems = '';
 
            for ($pb_widget_form_loopi =0; $pb_widget_form_loopi< count($multiOptionFieldValues); $pb_widget_form_loopi++) {
-             $thisRadioLabel = '<label for="fieldID-'.$widgetPbFbFormFeildsIndex.'-'.$pb_widget_form_loopi.'-'.$pbFormBuilderUniqueId.'">'.$multiOptionFieldValues[$pb_widget_form_loopi].'</label>';
-             $thisRadioItem = '<span '.$multiFieldStyleAttr.'>  <input type="radio" name="field-'.$widgetPbFbFormFeildsIndex.'-'.$thisFieldName.'"  id="fieldID-'.$widgetPbFbFormFeildsIndex.'-'.$pb_widget_form_loopi.'-'.$pbFormBuilderUniqueId.'" value="'.$multiOptionFieldValues[$pb_widget_form_loopi].'" > ' .$thisRadioLabel. ' </span>';
+             $thisRadioLabel = $multiOptionFieldValues[$pb_widget_form_loopi].'</label>';
+             $thisRadioItem = '<span '.$multiFieldStyleAttr.' class="pbFormMultiLabel"> <label for="fieldID-'.$widgetPbFbFormFeildsIndex.'-'.$pb_widget_form_loopi.'-'.$pbFormBuilderUniqueId.'"> <input type="radio" name="field-'.$widgetPbFbFormFeildsIndex.'-'.$thisFieldName.'[]"  id="fieldID-'.$widgetPbFbFormFeildsIndex.'-'.$pb_widget_form_loopi.'-'.$pbFormBuilderUniqueId.'" value="'.$multiOptionFieldValues[$pb_widget_form_loopi].'"  '.$fbFieldRequired.'> ' .$thisRadioLabel. ' </span>';
              
              $prevRadioFields = $allRadioItems;
              $allRadioItems = $prevRadioFields .  $thisRadioItem;
@@ -127,8 +126,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
            $allRadioItems = '';
 
            for ($pb_widget_form_loopi =0; $pb_widget_form_loopi< count($multiOptionFieldValues); $pb_widget_form_loopi++) {
-             $thisRadioLabel = '<label for="fieldID-'.$widgetPbFbFormFeildsIndex.'-'.$pb_widget_form_loopi.'-'.$pbFormBuilderUniqueId.'">'.$multiOptionFieldValues[$pb_widget_form_loopi].'</label>';
-             $thisRadioItem = '<span '.$multiFieldStyleAttr.'>  <input type="checkbox" name="field-'.$widgetPbFbFormFeildsIndex.'-'.$thisFieldName.'[]"  id="fieldID-'.$widgetPbFbFormFeildsIndex.'-'.$pb_widget_form_loopi.'-'.$pbFormBuilderUniqueId.'" value="'.$multiOptionFieldValues[$pb_widget_form_loopi].'" > ' .$thisRadioLabel. ' </span>';
+             $thisRadioLabel = $multiOptionFieldValues[$pb_widget_form_loopi].'</label>';
+             $thisRadioItem = '<span '.$multiFieldStyleAttr.' class="pbFormMultiLabel"> <label for="fieldID-'.$widgetPbFbFormFeildsIndex.'-'.$pb_widget_form_loopi.'-'.$pbFormBuilderUniqueId.'"> <input type="checkbox" name="field-'.$widgetPbFbFormFeildsIndex.'-'.$thisFieldName.'[]"  id="fieldID-'.$widgetPbFbFormFeildsIndex.'-'.$pb_widget_form_loopi.'-'.$pbFormBuilderUniqueId.'" value="'.$multiOptionFieldValues[$pb_widget_form_loopi].'"  '.$fbFieldRequired.'> ' .$thisRadioLabel. ' </span>';
              
              $prevRadioFields = $allRadioItems;
              $allRadioItems = $prevRadioFields .  $thisRadioItem;
@@ -148,15 +147,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
            }
 
 
-           $pbThisFormField = '<select name="field-'.$widgetPbFbFormFeildsIndex.'-'.$thisFieldName.'"  id="fieldID-'.$widgetPbFbFormFeildsIndex.'"  '.$thisFieldAttr.' class="pbFormField  '.$formBuilderFieldSize.'">'. $allRadioItems .'</select>';  
+           $pbThisFormField = '<select name="field-'.$widgetPbFbFormFeildsIndex.'-'.$thisFieldName.'"  id="fieldID-'.$widgetPbFbFormFeildsIndex.'"  '.$thisFieldAttr.' class="pbFormField  '.$formBuilderFieldSize.'"  '.$fbFieldRequired.' >'. $allRadioItems .'</select>';  
       break;
       default: 
-           $pbThisFormField = '<input type="'.$widgetPbFbFormFeild['fbFieldType'].'" name="field-'.$widgetPbFbFormFeildsIndex.'-'.$thisFieldName.'"  '.$thisFieldAttr.' class="pbFormField  '.$formBuilderFieldSize.'" >';
+           $pbThisFormField = '<input type="'.$widgetPbFbFormFeild['fbFieldType'].'" name="field-'.$widgetPbFbFormFeildsIndex.'-'.$thisFieldName.'"  '.$thisFieldAttr.' class="pbFormField  '.$formBuilderFieldSize.'" '.$fbFieldRequired.' >';
       break;
     } //switch end
 
       $pbThisFormFieldLabel = '<label for="fieldID-'.$widgetPbFbFormFeildsIndex.'" class="pbFormLabel"> '.$thisFieldOptions['fbFieldLabel'].' </label>';
-      $pbThisFormFieldWrapped =  '<div class="pluginops_form_inp_wrapper" style="width:'.($thisFieldOptions['fbFieldWidth']-3).'%; margin-right:'.$formBuilderFieldHGap.'%; margin-top:'.$formBuilderFieldVGap.'%; display:inline-block;">' . $pbThisFormFieldLabel.' <br> '.$pbThisFormField .'</div>';
+      $pbThisFormFieldWrapped =  '<div class="pluginops_form_inp_wrapper" style="width:'.($thisFieldOptions['fbFieldWidth']-(int)$formBuilderFieldHGap  ).'%; margin-right:'.$formBuilderFieldHGap.'%; margin-top:'.$formBuilderFieldVGap.'%; display:inline-block;">' . $pbThisFormFieldLabel.' <br> '.$pbThisFormField .'</div>';
 
       echo $pbThisFormFieldWrapped;
 
@@ -175,9 +174,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     $buttonMargin = '2% 2.5% 2% '.$calcMargin.'%';
   }
 
+  $formBuilderbtnIconLoading = "<i class='fa fa-spinner fa-spin formIconLoader' style='display:none;' ></i>";
+  $formBuilderbtnIconSuccess = "<i class='fa fa-check-circle formIconSuccess' style='display:none;' ></i>";
+
   $pbFormBuilderSubmitStyles = ' style=" width:100%; background:'.$widgetPbFbFormSubmitOptions['formBuilderBtnBgColor'].'; color:'.$widgetPbFbFormSubmitOptions['formBuilderBtnColor'].'; font-size:'.$widgetPbFbFormSubmitOptions['formBuilderBtnFontSize'].'px;  border:'.$widgetPbFbFormSubmitOptions['formBuilderBtnBorderWidth'].'px solid '.$widgetPbFbFormSubmitOptions['formBuilderBtnBorderColor'].'; border-radius:'.$widgetPbFbFormSubmitOptions['formBuilderBtnBorderRadius'].'px; font-family:'.str_replace('+', ' ', $widgetPbFbFormSubmitOptions['formBuilderBtnFontFamily'] ).', sans-serif; " ';
 
-  $pbFormBuilderSubmit = '<div class="pluginops_form_inp_wrapper" style="text-align:'.$widgetPbFbFormSubmitOptions['formBuilderBtnAlignment'].'; width:'.($widgetPbFbFormSubmitOptions['formBuilderBtnWidth']-3).'%;  margin:'.$buttonMargin.';  margin-left:'.$formBuilderBtnHGap.'%; margin-top:'.$formBuilderBtnVGap.'%; display:inline-block;">  <button type="submit" '.$pbFormBuilderSubmitStyles.' class="pbField-'.$widgetPbFbFormSubmitOptions['formBuilderBtnSize'].' form-btn-'.$pbFormBuilderUniqueId.' "> '.$formBuilderbtnIconBefore.' '.$widgetPbFbFormSubmitOptions['formBuilderBtnText'].' '.$formBuilderbtnIconAfter.' </button> </div>';
+  $pbFormBuilderSubmit = '<div class="pluginops_form_inp_wrapper" style="text-align:'.$widgetPbFbFormSubmitOptions['formBuilderBtnAlignment'].'; width:'.($widgetPbFbFormSubmitOptions['formBuilderBtnWidth']- (int)$formBuilderBtnHGap ).'%;  margin:'.$buttonMargin.';  margin-right:'.$formBuilderBtnHGap.'%; margin-top:'.$formBuilderBtnVGap.'%; display:inline-block;">  <button type="submit" '.$pbFormBuilderSubmitStyles.' class="pbField-'.$widgetPbFbFormSubmitOptions['formBuilderBtnSize'].' form-btn-'.$pbFormBuilderUniqueId.' ">'.$formBuilderbtnIconBefore.' '.$widgetPbFbFormSubmitOptions['formBuilderBtnText'].' '.$formBuilderbtnIconAfter.' </button> </div>';
 
 
   $pbFormBuilderExtraFields = " <input type='hidden' name='psID' value='$current_pageID'>       
@@ -188,10 +190,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
   $pbFormBuilderStylesID = '#'.$pbFormBuilderUniqueId;
 
-  $pbThisFormBuilderStyles = '<style>  '.$pbFormBuilderStylesID.' .pbFormField {   background:'.$widgetPbFbFormFeildOptions['formBuilderFieldBgColor'].';  color:'.$widgetPbFbFormFeildOptions['formBuilderFieldColor'].'; border:'.$widgetPbFbFormFeildOptions['formBuilderFieldBorderWidth'].'px solid '.$widgetPbFbFormFeildOptions['formBuilderFieldBorderColor'].'; border-radius:'.$widgetPbFbFormFeildOptions['formBuilderFieldBorderRadius'].'px; font-family:'.str_replace('+', ' ', $widgetPbFbFormFeildOptions['formBuilderFieldFontFamily'] ).', sans-serif;   }           '.$pbFormBuilderStylesID.' .pbFormLabel{ font-size:'.$widgetPbFbFormFeildOptions['formBuilderLabelSize'].'px; color:'.$widgetPbFbFormFeildOptions['formBuilderLabelColor'].'; display:'.$widgetPbFbFormFeildOptions['formBuilderFieldLabelDisplay'].'; line-height:3em; }  '.$pbFormBuilderStylesID.' button:hover { background:'.$widgetPbFbFormSubmitOptions['formBuilderBtnHoverBgColor'].' !important; color:'.$widgetPbFbFormSubmitOptions['formBuilderBtnHoverTextColor'].' !important; transition:all .5s; } </style>';
-  if (!isset($widgetSubscribeFormWidget)) {
-    $widgetSubscribeFormWidget = false;
-  }
+  $pbThisFormBuilderStyles = '<style>  '.$pbFormBuilderStylesID.' .pbFormField {   background:'.$widgetPbFbFormFeildOptions['formBuilderFieldBgColor'].';  color:'.$widgetPbFbFormFeildOptions['formBuilderFieldColor'].'; border:'.$widgetPbFbFormFeildOptions['formBuilderFieldBorderWidth'].'px solid '.$widgetPbFbFormFeildOptions['formBuilderFieldBorderColor'].'; border-radius:'.$widgetPbFbFormFeildOptions['formBuilderFieldBorderRadius'].'px; font-family:'.str_replace('+', ' ', $widgetPbFbFormFeildOptions['formBuilderFieldFontFamily'] ).', sans-serif;   } 
+
+    '.$pbFormBuilderStylesID.' .pbFormLabel{ font-size:'.$widgetPbFbFormFeildOptions['formBuilderLabelSize'].'px; color:'.$widgetPbFbFormFeildOptions['formBuilderLabelColor'].'; display:'.$widgetPbFbFormFeildOptions['formBuilderFieldLabelDisplay'].'; line-height:3em; }  '.$pbFormBuilderStylesID.' button:hover { background:'.$widgetPbFbFormSubmitOptions['formBuilderBtnHoverBgColor'].' !important; color:'.$widgetPbFbFormSubmitOptions['formBuilderBtnHoverTextColor'].' !important; transition:all .5s; }
+
+    '.$pbFormBuilderStylesID.' .pbFormMultiLabel label { font-size:'.$widgetPbFbFormFeildOptions['formBuilderLabelSize'].'px; color:'.$widgetPbFbFormFeildOptions['formBuilderLabelColor'].';   font-weight:200; }  '.$pbFormBuilderStylesID.' button:hover { background:'.$widgetPbFbFormSubmitOptions['formBuilderBtnHoverBgColor'].' !important; color:'.$widgetPbFbFormSubmitOptions['formBuilderBtnHoverTextColor'].' !important; transition:all .5s; }
+    </style>';
+
   if ($widgetSubscribeFormWidget !== true) {
     echo "<script src='".ULPB_PLUGIN_URL."/js/cookie.js'></script>";
     $widgetSubscribeFormWidget = true;
@@ -204,6 +209,20 @@ if ( ! defined( 'ABSPATH' ) ) exit;
   }
 
   ob_start();
+
+  if ( !isset($widgetPbFbFormEmailOptions['formFailureMessage'] )) {
+    $widgetPbFbFormEmailOptions['formFailureMessage'] = 'Some Error Occured while sending the request!';
+  }else{
+    if ($widgetPbFbFormEmailOptions['formFailureMessage'] == '') {
+      $widgetPbFbFormEmailOptions['formFailureMessage'] = 'Some Error Occured while sending the request!';
+    }
+  }
+
+  if (!isset($widgetPbFbFormEmailOptions['formSuccessCustomAction'] )) {
+    $widgetPbFbFormEmailOptions['formSuccessCustomAction'] = '';
+  }
+
+
   ?>
   <script type="text/javascript">
     (function($){
@@ -211,8 +230,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         $('#yourMessageHP').hide();
       $('#'+'<?php echo $pbFormBuilderUniqueId; ?>').on('submit', function()  {
         var successMessage = "<?php echo $widgetPbFbFormEmailOptions['formSuccessMessage']; ?>";
+        var errorMessage = "<?php echo $widgetPbFbFormEmailOptions['formFailureMessage']; ?>";
         var successAction = "<?php echo $formSuccessAction; ?>";
         var successActionUrl = "<?php echo $formSuccessActionURL; ?>";
+
+      var buttonText = $('#'+'<?php echo $pbFormBuilderUniqueId; ?> button').html();
+
+      $('#'+'<?php echo $pbFormBuilderUniqueId; ?> button').html('');
+      $('#'+'<?php echo $pbFormBuilderUniqueId; ?> button').append("<i class='fa fa-spinner fa-spin formIconLoader'></i>");
 
         var form = $(this);
         var result = " ";
@@ -230,92 +255,22 @@ if ( ! defined( 'ABSPATH' ) ) exit;
               var dripResult = result['drip'];
               var aweberResult = result['aweber'];
               var convertkitResult = result['convertkit'];
-
-                if (emailResult == 'success') {
+              
+                if (emailResult == 'success' || mcResult == 'success' || grResult == 'success' || cmResult == 'success' || acResult == 'success' || dripResult == 'success' || aweberResult == 'success' || convertkitResult == 'success') {
+                  
                   form.siblings('.pb_success').children('p').html(successMessage);
                   form.siblings('.pb_success').show();
+                  $('#'+'<?php echo $pbFormBuilderUniqueId; ?> button').html(buttonText);
                   $.cookie("pluginops_user_subscribed_form<?php echo $current_pageID; ?>", 'yes', {path: '/', expires : 30 });
-                  setTimeout(function(){
-                    $('.pluginops-modal').fadeOut();
-                  } , 2000);
-
-                  if (successAction == 'redirect') {
-                    location.href = successActionUrl;
-                  }
-
-                }else if(mcResult == 'success'){
-                  form.siblings('.pb_success').children('p').html(successMessage);
-                  form.siblings('.pb_success').show();
-                  $.cookie("pluginops_user_subscribed_form<?php echo $current_pageID; ?>", 'yes', {path: '/', expires : 30 });
-                  setTimeout(function(){
-                    $('.pluginops-modal').fadeOut();
-                  } , 2000);
-                  if (successAction == 'redirect') {
-                    location.href = successActionUrl;
-                  }
-                }else if(grResult == 'success'){
-                  form.siblings('.pb_success').children('p').html(successMessage);
-                  form.siblings('.pb_success').show();
-                  $.cookie("pluginops_user_subscribed_form<?php echo $current_pageID; ?>", 'yes', {path: '/', expires : 30 });
-                  setTimeout(function(){
-                    $('.pluginops-modal').fadeOut();
-                  } , 2000);
-                  if (successAction == 'redirect') {
-                    location.href = successActionUrl;
-                  }
-                }else if(cmResult == 'success'){
-                  form.siblings('.pb_success').children('p').html(successMessage);
-                  form.siblings('.pb_success').show();
-                  $.cookie("pluginops_user_subscribed_form<?php echo $current_pageID; ?>", 'yes', {path: '/', expires : 30 });
-                  setTimeout(function(){
-                    $('.pluginops-modal').fadeOut();
-                  } , 2000);
-                  if (successAction == 'redirect') {
-                    location.href = successActionUrl;
-                  }
-                } else if(acResult == 'success'){
-                  form.siblings('.pb_success').children('p').html(successMessage);
-                  form.siblings('.pb_success').show();
-                  $.cookie("pluginops_user_subscribed_form<?php echo $current_pageID; ?>", 'yes', {path: '/', expires : 30 });
-                  setTimeout(function(){
-                    $('.pluginops-modal').fadeOut();
-                  } , 2000);
-                  if (successAction == 'redirect') {
-                    location.href = successActionUrl;
-                  }
-                }else if(dripResult == 'success'){
-                  form.siblings('.pb_success').children('p').html(successMessage);
-                  form.siblings('.pb_success').show();
-                  $.cookie("pluginops_user_subscribed_form<?php echo $current_pageID; ?>", 'yes', {path: '/', expires : 30 });
-                  setTimeout(function(){
-                    $('.pluginops-modal').fadeOut();
-                  } , 2000);
-                  if (successAction == 'redirect') {
-                    location.href = successActionUrl;
-                  }
-                }else if(aweberResult == 'success'){
-                  form.siblings('.pb_success').children('p').html(successMessage);
-                  form.siblings('.pb_success').show();
-                  $.cookie("pluginops_user_subscribed_form<?php echo $current_pageID; ?>", 'yes', {path: '/', expires : 30 });
-                  setTimeout(function(){
-                    $('.pluginops-modal').fadeOut();
-                  } , 2000);
-                  if (successAction == 'redirect') {
-                    location.href = successActionUrl;
-                  }
-                } else if(convertkitResult == 'success'){
-                  form.siblings('.pb_success').children('p').html(successMessage);
-                  form.siblings('.pb_success').show();
-                  $.cookie("pluginops_user_subscribed_form<?php echo $current_pageID; ?>", 'yes', {path: '/', expires : 30 });
-                  setTimeout(function(){
-                    $('.pluginops-modal').fadeOut();
-                  } , 2000);
+                  
+                  <?php echo $widgetPbFbFormEmailOptions['formSuccessCustomAction']; ?>
                   if (successAction == 'redirect') {
                     location.href = successActionUrl;
                   }
                 } else{
-                   form.siblings('.pb_error').children('p').html(emailResult);
+                   form.siblings('.pb_error').children('p').html(errorMessage);
                    form.siblings('.pb_error').show();
+                   $('#'+'<?php echo $pbFormBuilderUniqueId; ?> button').html(buttonText);
                 }
 
                 console.log('Database Result  : ' + result['database']);
@@ -325,7 +280,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                 console.log('Active Campaign Result  : ' + result['activeCampaign']);
                 console.log('Drip Result  : ' + result['drip']);
                 console.log('Aweber Result  : ' + result['aweber']);
-                console.log('Convertkit Result  : ' + result['convertkit']);
+                console.log('ConvertKit Result  : ' + result['convertkit']);
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+              form.siblings('.pb_error').children('p').html(thrownError);
+              form.siblings('.pb_error').show();
             }
           });
                          

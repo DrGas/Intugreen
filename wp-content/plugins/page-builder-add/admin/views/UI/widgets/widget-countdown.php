@@ -754,7 +754,7 @@
             </div>
         </div>
         <br><br><hr><br>
-        <label>Border Radius </label>
+        <label>Corner Radius </label>
         <input type="number" class="pbCountDownNumberBorderRadius">px
         <br><br><hr><br>
         <label>Label Font family :</label>

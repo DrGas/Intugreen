@@ -2,7 +2,7 @@
 /*
 * Plugin Name: PluginOps Page Builder
 * Description: A drag and drop free responsive page builder that simplifies building your landing pages & websites.
-* Version: 1.4.5.9
+* Version: 1.4.6.0
 * Author: PluginOps
 * Text Domain: page-builder-add
 * Domain Path: /languages

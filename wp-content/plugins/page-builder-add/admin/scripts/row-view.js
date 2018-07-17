@@ -36,10 +36,12 @@ pageBuilderApp.RowView = Backbone.View.extend({
       'click #editColumnSaveWidget': 'updateColumnWidgetTrigger',
       'click .draggableWidgets': 'widgetDrag',
       'click .wdgt-dropped': 'widgetDropped',
+      'click .wdgt-colChange': 'widgetColChange',
       'click .wdgt-dragRemove': 'widgetDragRemove',
       'click .widgetDeleteHandle': 'deleteWidget',
       'click .widgetDuplicateHandle': 'duplicateWidget',
       'click .widgetEditHandle' : 'editWidget',
+      'dblclick .po_widgets' : 'editWidgetTrigger',
       'click .addNewRow' : 'addNewRow',
       'click .addNewGlobalRow' : 'addNewGlobalRow',
       'click .addNewRowBlock' : 'addNewRowBlock',
@@ -56,7 +58,7 @@ pageBuilderApp.RowView = Backbone.View.extend({
         return {}
     },
     initialize: function(){
-      _.bindAll(this, 'render','deleteRow','updateRow','EditRow','EditColumn','updateColumn','updateWidth','DuplicateRow','widgetDrag','widgetDropped','setGlobalRow','addNewRow','addNewGlobalRow','addNewRowBlock','setColumnsOfThisModel','widgetWinlineEditingEnable','widgetInlineEditorSave','updateRowHeight','deleteWidgetFromList','updateColumnWidgetTrigger');
+      _.bindAll(this, 'render','deleteRow','updateRow','EditRow','EditColumn','updateColumn','updateWidth','DuplicateRow','widgetDrag','widgetDropped','widgetColChange','setGlobalRow','addNewRow','addNewGlobalRow','addNewRowBlock','setColumnsOfThisModel','widgetWinlineEditingEnable','widgetInlineEditorSave','updateRowHeight','deleteWidgetFromList','updateColumnWidgetTrigger');
     },
     render: function(){
       this.$el.html(this.template(this.model.toJSON() )  );
@@ -232,7 +234,7 @@ pageBuilderApp.RowView = Backbone.View.extend({
         }
       }
       if (row_bg_img != '') {
-        rowBackgroundOptions = 'background: url('+row_bg_img+');';
+        rowBackgroundOptions = 'background: url('+row_bg_img+') no-repeat center center; background-size: cover;';
       }
 
       if (typeof(rowData['rowBackgroundType']) !== 'undefined') {
@@ -287,7 +289,7 @@ pageBuilderApp.RowView = Backbone.View.extend({
           }
 
           if (rowOverlayGradient['rowOverlayGradientType'] == 'radial') {
-            rowOverlayBackgroundOptions = 'background: radial-gradient(at '+rowOverlayGradient['rowOverlayGradientPosition']+', '+rowOverlayGradient['rowOverlayGradientColorFirst']+' '+rowOverlayGradient['rowOverlayGradientLocationFirst']+'%,'+rowOverlayGradient['rowOverlayGradientColorSecond']+' '+rowOverlayGradient['rowGradientLocationSecond']+'%);';
+            rowOverlayBackgroundOptions = 'background: radial-gradient(at '+rowOverlayGradient['rowOverlayGradientPosition']+', '+rowOverlayGradient['rowOverlayGradientColorFirst']+' '+rowOverlayGradient['rowOverlayGradientLocationFirst']+'%,'+rowOverlayGradient['rowOverlayGradientColorSecond']+' '+rowOverlayGradient['rowOverlayGradientLocationSecond']+'%);';
           }
           
         }
@@ -297,7 +299,35 @@ pageBuilderApp.RowView = Backbone.View.extend({
 
       $(this.el).attr('id',rowID);
 
-      $(this.el).append(' <div class="row-overlay" style="height:100%; '+rowOverlayBackgroundOptions+' top:0; left: 0; width: 100%; position:absolute;"></div> <div id="ulpb_row_controls" class="ulpb_row_controls" style="display:none;"> <div id="edit_form_close" class="btn-red btn" style="display:none;"><span class="dashicons dashicons-no-alt"></span></div><div id="editRowSave" style="display:none;"><span style="padding: 25px 0px 25px 0px;background: transparent;border-radius: 5px;display:unset;font-size: 35px;color: #585858;border-top-left-radius: 0;border-bottom-left-radius: 0;" class="dashicons dashicons-arrow-left"></span> </div>  <div id="editRowSaveVisible" class=""><span class="dashicons dashicons-arrow-left editSaveVisibleIcon"></span> </div>  </div> </div></div> <div id="thisRowScripts" style="display:none !important;">'+ currentRowResponsiveTriggerScripts + thisRowHoverStyleTag +'</div>');
+      var rennderredShapeTopScripts = '';
+      if (typeof(rowData['bgSTop']) != 'undefined') {
+        var bgSTop = rowData['bgSTop'];
+        var shapeType = bgSTop['rbgstType'];
+        var rennderredShapeTop = bgshapessvgrender(rowID, shapeType, false, bgSTop, 'false' );
+
+        jQuery(this.el).append(rennderredShapeTop['html']);
+        rennderredShapeTopScripts =  rennderredShapeTop['scripts'];
+
+      }
+
+      var rennderredShapeBottomScripts = '';
+      if (typeof(rowData['bgSBottom']) != 'undefined') {
+        var bgSBottom = rowData['bgSBottom'];
+        var shapeType = bgSBottom['rbgsbType'];
+        bgSTop = 'false';
+        var rennderredShapeBottom = bgshapessvgrender(rowID, shapeType, true, 'false', bgSBottom );
+
+        jQuery(this.el).append(rennderredShapeBottom['html']);
+        rennderredShapeBottomScripts = rennderredShapeBottom['scripts'];
+
+      }
+
+
+      $(this.el).append(' <div class="row-overlay" style="height:100%; '+rowOverlayBackgroundOptions+' top:0; left: 0; width: 100%; position:absolute;"></div> <div id="ulpb_row_controls" class="ulpb_row_controls" style="display:none;"> <div id="edit_form_close" class="btn-red btn" style="display:none;"><span class="dashicons dashicons-no-alt"></span></div><div id="editRowSave" style="display:none;"><span style="padding: 25px 0px 25px 0px;background: transparent;border-radius: 5px;display:unset;font-size: 35px;color: #585858;border-top-left-radius: 0;border-bottom-left-radius: 0;" class="dashicons dashicons-arrow-left"></span> </div>  <div id="editRowSaveVisible" class=""><span class="dashicons dashicons-arrow-left editSaveVisibleIcon"></span> </div>  </div> </div></div> <div id="thisRowScripts" style="display:none !important;">'+ currentRowResponsiveTriggerScripts + rennderredShapeTopScripts + rennderredShapeBottomScripts + thisRowHoverStyleTag +'</div>');
+
+      
+
+          
 
 
       /*
@@ -581,7 +611,7 @@ pageBuilderApp.RowView = Backbone.View.extend({
 
         var colControls = '<div id="ulpb_column_controls" class="ulpb_column_controls  ulpb_column_controls'+this_column+'" style="display:none;" ><div id="edit_form_closeCol" style="display:none;" class="btn-red btn"><span class="dashicons dashicons-no-alt"></span></div><div id="editColumnSave" style="display:none;" data-col_id='+this_column+' ></div>  <div id="editColumnSaveWidget" style="display:none;" data-col_id='+this_column+' ></div>      <div id="editColumnSaveVisible" data-col_id='+this_column+' ><span class="dashicons dashicons-arrow-left editSaveVisibleIcon"  data-col_id='+this_column+'></span></div><br></div> \n';
         
-        $(this.el).append('<div class="column '+this_column+' '+columnCustomClass+' " id='+rowID+'-'+this_column+' data-col_id='+this_column+' style="width:' + colWidth +colWidthUnit+';  min-height:'+rowHeight+rowHeightUnit+'; '+colBackgroundOptions+' '+this_column_margins+'  '+this_col_shadow +'  '+columnCSS+'"> <div id="WidthSave" class="pb_hidden"></div> <div id="RowHeightSave" class="pb_hidden"></div>  <div class="wdgt-dropped" style="display:none;" data-this_col_id='+this_column+'></div> '+colEditBtn+'</div>');
+        $(this.el).append('<div class="column '+this_column+' '+columnCustomClass+' " id='+rowID+'-'+this_column+' data-col_id='+this_column+' style="width:' + colWidth +colWidthUnit+';  min-height:'+rowHeight+rowHeightUnit+'; '+colBackgroundOptions+' '+this_column_margins+'  '+this_col_shadow +'  '+columnCSS+'"> <div id="WidthSave" class="pb_hidden"></div> <div id="RowHeightSave" class="pb_hidden"></div>  <div class="wdgt-dropped" style="display:none;" data-this_col_id='+this_column+'></div>  <div class="wdgt-colChange" style="display:none;" data-this_col_id='+this_column+'></div> '+colEditBtn+'</div>');
 
 
         $('#'+rowID+'-'+this_column).mouseenter(function(ev){
@@ -827,7 +857,7 @@ pageBuilderApp.RowView = Backbone.View.extend({
         displayGButton = 'inline-block';
       }
 
-      $(this.el).append('<div style=" display:block;clear:left;position: absolute;z-index:99;bottom: 4px;right: 5px; "><div id="rowDelete" class="row-btn btn-red btn" title="Delete Row" ><span class="dashicons dashicons-trash"></span></div> <div id="rowEdit" class="row-btn btn"  title="Edit Row"> <span class="dashicons dashicons-edit"></span></div> <div id="rowDuplicate" class="row-btn btn" title="Duplicate"> <span class="dashicons dashicons-admin-page"></span></div> <div id="setGlobalRow" style="background:#F0D53D;diplay:none;" class="row-btn btn globalRowBtn" title="Set Global"> <span class="dashicons dashicons-networking"></span></div> <div class="pbHandle row-btn btn" style="background: rgb(45, 60, 60) !important;"><span class="dashicons dashicons-move" title="Move"></span></div>    <div class="addNewRowSection row-btn btn" style="background:#2196f3 !important;"><span class="dashicons dashicons-plus" title="Add New Section"></span></div> </div>');
+      $(this.el).append('<div style=" display:block;clear:left;position: relative;z-index:99;bottom: 4px;right: 5px; "><div id="rowDelete" class="row-btn btn-red btn" title="Delete Row" ><span class="dashicons dashicons-trash"></span></div> <div id="rowEdit" class="row-btn btn"  title="Edit Row"> <span class="dashicons dashicons-edit"></span></div> <div id="rowDuplicate" class="row-btn btn" title="Duplicate"> <span class="dashicons dashicons-admin-page"></span></div> <div id="setGlobalRow" style="background:#F0D53D;diplay:none;" class="row-btn btn globalRowBtn" title="Set Global"> <span class="dashicons dashicons-networking"></span></div> <div class="pbHandle row-btn btn" style="background: rgb(45, 60, 60) !important;"><span class="dashicons dashicons-move" title="Move"></span></div>    <div class="addNewRowSection row-btn btn" style="background:#2196f3 !important;"><span class="dashicons dashicons-plus" title="Add New Section"></span></div> </div>');
       
         $(this.el).append('<div class="newRowBtnContainer" >  <div class="newRowBtnContainerSections"> <div class="addNewRow  row-section-btn" style="background:#5AB1F7;" > ADD NEW SECTION</div> </div>      <div class="newRowBtnContainerSections" style="display:'+displayGButton+';">    <div class="addNewGlobalRow  row-section-btn" style="background:#F1D204; " > INSERT GLOBAL ROW</div> </div> <div class="newRowBtnContainerSections"  > <div class="addNewRowBlock  row-section-btn" style="background:#4CAF50; " > INSERT ROW BLOCK</div>   </div>  </div>   </div>');
 
@@ -963,6 +993,10 @@ pageBuilderApp.RowView = Backbone.View.extend({
       this.render();
       jQuery('.edit_column').hide("slide", { direction: "left" }, 500);
       $('.isChagesMade').val('true');
+    },
+    widgetColChange: function(ev){
+      $(this.el).html('');
+      this.render();
     },
     widgetDragRemove: function(ev){
       var droppedOnRow = $('.widgetDroppedRowId').val();
@@ -1115,6 +1149,10 @@ pageBuilderApp.RowView = Backbone.View.extend({
       $(this.el).html('');
       this.render();
       $('.isChagesMade').val('true');
+    },
+    editWidgetTrigger: function(ev){
+      thisWidgetElParent = $(ev.target).closest('.po_widgets');
+      $(thisWidgetElParent).children('.widgetEditHandle').trigger('click');
     },
     editWidget: function(ev){
       thisWidgetEl = $(ev.target );
@@ -1486,6 +1524,43 @@ pageBuilderApp.RowView = Backbone.View.extend({
         $('.rowPaddingRightMobile').val('');
       }
 
+      if (typeof(rowData['bgSTop']) !== "undefined"){
+        var bgSTop = rowData['bgSTop'];
+        $('.rbgstType').val(bgSTop['rbgstType']);
+        $('.rbgstColor').val(bgSTop['rbgstColor']);
+        $('.rbgstWidth').val(bgSTop['rbgstWidth']);
+        $('.rbgstWidtht').val(bgSTop['rbgstWidtht']);
+        $('.rbgstWidthm').val(bgSTop['rbgstWidthm']);
+        $('.rbgstHeight').val(bgSTop['rbgstHeight']);
+        $('.rbgstHeightt').val(bgSTop['rbgstHeightt']);
+        $('.rbgstHeightm').val(bgSTop['rbgstHeightm']);
+        $('.rbgstFlipped').val(bgSTop['rbgstFlipped']);
+        $('.rbgstFront').val(bgSTop['rbgstFront']);
+
+        var bgSBottom = rowData['bgSBottom'];
+        $('.rbgsbType').val(bgSBottom['rbgsbType']);
+        $('.rbgsbColor').val(bgSBottom['rbgsbColor']);
+        $('.rbgsbWidth').val(bgSBottom['rbgsbWidth']);
+        $('.rbgsbWidtht').val(bgSBottom['rbgsbWidtht']);
+        $('.rbgsbWidthm').val(bgSBottom['rbgsbWidthm']);
+        $('.rbgsbHeight').val(bgSBottom['rbgsbHeight']);
+        $('.rbgsbHeightt').val(bgSBottom['rbgsbHeightt']);
+        $('.rbgsbHeightm').val(bgSBottom['rbgsbHeightm']);
+        $('.rbgsbFlipped').val(bgSBottom['rbgsbFlipped']);
+        $('.rbgsbFront').val(bgSBottom['rbgsbFront']);
+
+        $('.rbgstColor').parent().parent().siblings('.wp-color-result').children('.color-alpha').css('background',bgSTop['rbgstColor']);
+        $('.rbgsbColor').parent().parent().siblings('.wp-color-result').children('.color-alpha').css('background',bgSBottom['rbgsbColor']);
+      }else{
+        $('.rbgstType').val('none');
+        $('.rbgstWidth').val('100');
+        $('.rbgstHeight').val('200');
+
+        $('.rbgsbType').val('none');
+        $('.rbgsbWidth').val('100');
+        $('.rbgsbHeight').val('200');
+      }
+
       var customStyling = rowData['customStyling'];
       var customJS = rowData['customJS'];
 
@@ -1634,6 +1709,14 @@ pageBuilderApp.RowView = Backbone.View.extend({
         }
       }
 
+      var prevRowCols = this.model.get('columns');
+      var prevRowHeight = this.model.get('rowHeight');
+      var prevRowHeightTablet = this.model.get('rowHeightTablet');
+      var prevRowHeightMobile = this.model.get('rowHeightMobile');
+      var prevRowHeightUnit = this.model.get('rowHeightUnit');
+      var prevRowHeightUnitTablet = this.model.get('rowHeightUnitTablet');
+      var prevRowHeightUnitMobile = this.model.get('rowHeightUnitMobile');
+
       var rowBackgroundType = $('.rowBackgroundType:checked').val();
       var rowOverlayBackgroundType = $('.rowOverlayBackgroundType:checked').val();
       if (rowheight) {
@@ -1684,6 +1767,30 @@ pageBuilderApp.RowView = Backbone.View.extend({
             rowHideOnDesktop:$('.rowHideOnDesktop').val(),
             rowHideOnTablet:$('.rowHideOnTablet').val(),
             rowHideOnMobile:$('.rowHideOnMobile').val(),
+            bgSTop: {
+              rbgstType: $('.rbgstType').val(),
+              rbgstColor:$('.rbgstColor').val(),
+              rbgstWidth:$('.rbgstWidth').val(),
+              rbgstWidtht:$('.rbgstWidtht').val(),
+              rbgstWidthm:$('.rbgstWidthm').val(),
+              rbgstHeight:$('.rbgstHeight').val(),
+              rbgstHeightt:$('.rbgstHeightt').val(),
+              rbgstHeightm:$('.rbgstHeightm').val(),
+              rbgstFlipped:$('.rbgstFlipped').val(),
+              rbgstFront: $('.rbgstFront').val(),
+            },
+            bgSBottom: {
+              rbgsbType: $('.rbgsbType').val(),
+              rbgsbColor:$('.rbgsbColor').val(),
+              rbgsbWidth:$('.rbgsbWidth').val(),
+              rbgsbWidtht:$('.rbgsbWidtht').val(),
+              rbgsbWidthm:$('.rbgsbWidthm').val(),
+              rbgsbHeight:$('.rbgsbHeight').val(),
+              rbgsbHeightt:$('.rbgsbHeightt').val(),
+              rbgsbHeightm:$('.rbgsbHeightm').val(),
+              rbgsbFlipped:$('.rbgsbFlipped').val(),
+              rbgsbFront: $('.rbgsbFront').val(),
+            },
           }
         });
       }
@@ -1699,7 +1806,21 @@ pageBuilderApp.RowView = Backbone.View.extend({
       rowHeightUnitMobile = this.model.get('rowHeightUnitMobile');
       
       rowOptionsRender(rowID,rowCID,rowColumns,rowHeightUnit,rowData, rowHeightTablet,rowHeightUnitTablet,rowHeightMobile,rowHeightUnitMobile);
+
+
+      var aftRowCols = this.model.get('columns');
+      var aftRowHeight = this.model.get('rowHeight');
+      var aftRowHeightTablet = this.model.get('rowHeightTablet');
+      var aftRowHeightMobile = this.model.get('rowHeightMobile');
+      var aftRowHeightUnit = this.model.get('rowHeightUnit');
+      var aftRowHeightUnitTablet = this.model.get('rowHeightUnitTablet');
+      var aftRowHeightUnitMobile = this.model.get('rowHeightUnitMobile');
       
+      if ( aftRowCols != prevRowCols || aftRowHeight != prevRowHeight || aftRowHeightTablet != prevRowHeightTablet || aftRowHeightMobile != prevRowHeightMobile || aftRowHeightUnit != prevRowHeightUnit || aftRowHeightUnitTablet != prevRowHeightUnitTablet || aftRowHeightUnitMobile != prevRowHeightUnitMobile ) {
+          $(this.el).html('');
+          this.render();
+      }
+
       $('.isChagesMade').val('true');
       jQuery('section[rowid="'+rowID+'"]').children('#ulpb_row_controls').show();
     },
@@ -1869,6 +1990,12 @@ pageBuilderApp.RowView = Backbone.View.extend({
       var rowID = this.model.get('rowID');
       $('.ColcurrentEditableRowID').val(rowID);
       $('.currentEditableColId').val(this_column);
+
+      pageBuilderApp.currentlyEditedColId = rowID+'-'+this_column;
+      pageBuilderApp.currentlyEditedThisCol = this_column;
+      pageBuilderApp.currentlyEditedThisRow = this.model.get('rowID');
+
+
       var pbWrapperWidth = $('section[RowID="'+rowID+'"]').width();
       var thisColumnData = this.model.get(this_column);
       var this_column_widgets = thisColumnData['colWidgets'];

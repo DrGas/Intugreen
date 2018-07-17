@@ -1,6 +1,6 @@
 === Hummingbird Page Speed Optimization ===
 Plugin Name: Hummingbird Page Speed Optimization
-Version: 1.9.0
+Version:
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Contributors: WPMUDEV
@@ -8,7 +8,7 @@ Tags: Optimization, Caching, Speed, Performance, Faster, PageSpeed, Gzip, Compre
 Requires at least: 4.6
 Tested up to: 4.9.6
 Requires PHP: 5.2
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -109,6 +109,27 @@ Asset Optimization is a great way to speed up your site but moving, combining an
 
 
 == Changelog ==
+
+= 1.9.1 ( 2018-06-19 ) =
+- New: Icons for modules on Dashboard page
+- New: Summary module meta box on caching pages
+- New: Retain Asset Optimization settings on recheck of files
+- Enhance: Optimize stylesheets and javascript code
+- Enhance: Replace plugin menu icon font with inline SVG
+- Enhance: Various UI/UX improvements
+- Enhance: Compression savings calculations
+- Enhance: Database cleanup module to use builtin WordPress functions to clean expired transients
+- Enhance: Cloudflare meta box behavior
+- Enhance: Handling of individual expiry settings in Browser Caching module
+- Enhance: Better sync with the Hub
+- Fix: Gzip compression not properly detected on some sites
+- Fix: PHP warning during cron performance report
+- Fix: PHP warning after clicking on configure link on the Dashboard Advanced Tools meta box
+- Fix: RTL styles in CDN will now be processed correctly
+- Fix: Asset Optimization module incorrectly showing 0% savings
+- Fix: Asset Optimization module include/exclude toggle not enabling Publish Changes button
+- Fix: Translation strings
+- Fix: Clear cache button on admin tab not working properly on some installs
 
 = 1.9.0 ( 2018-05-29 ) =
 - New: Page caching dynamic page types

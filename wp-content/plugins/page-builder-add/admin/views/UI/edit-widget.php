@@ -257,7 +257,7 @@
                         <label>Border Color: </label>
                         <input type="text" class="color-picker_btn_two btnBorderColor" id="btnBorderColor" >
                         <br><br><hr><br>
-                        <label>Border Radius: </label>
+                        <label>Corner Radius: </label>
                         <input type="number" class="btnBorderRadius" max="100" min="0">
                         <br><br><hr><br>
                         <div>
@@ -983,10 +983,15 @@
                 <div>
                     <div class="wdt-fields pbp_form" style="width: 100%;">
                       <br>
-                      <p>Border</p>
-                      <br>
-                      <label>Set Border Width: </label>
-                      <input type="number" class="widgetBorderWidth" min="0" max="100" > px
+                      <p>Border Width </p>
+                      <input type="number" name="wbwt" class="padding_inline_inp  wbwt " id="wbwt"  placeholder="Top">
+
+                      <input type="number" name="wbwr" class="padding_inline_inp  wbwr " id="wbwr"  placeholder="Right">
+                          
+                      <input type="number" name="wbwb" class="padding_inline_inp  wbwb " id="wbwb"  placeholder="Bottom">
+                          
+                      <input type="number" name="wbwl" class="padding_inline_inp  wbwl " id="wbwl"  placeholder="Left">
+                      px
                       <br>
                       <br>
                       <label>Set Border Style: </label>
@@ -1002,8 +1007,16 @@
                       <input type="text" id="widgetBorderColor" class="color-picker_btn_two widgetBorderColor" data-alpha='true'  >
                       <br>
                       <br>
-                      <label>Border Radius: </label>
-                      <input type="number" class="widgetBorderRadius" min="0" max="100" > px
+                      <p>Corner Radius: </p>
+
+                      <input type="number" name="wbrt" class="padding_inline_inp  wbrt " id="wbrt"  placeholder="Top Left">
+
+                      <input type="number" name="wbrr" class="padding_inline_inp  wbrr " id="wbrr"  placeholder="Top Right">
+                          
+                      <input type="number" name="wbrb" class="padding_inline_inp  wbrb " id="wbrb"  placeholder="Bottom Right">
+                          
+                      <input type="number" name="wbrl" class="padding_inline_inp  wbrl " id="wbrl"  placeholder="Bottom Left">
+                      px
                       <br>
                       <br>
                       <hr>

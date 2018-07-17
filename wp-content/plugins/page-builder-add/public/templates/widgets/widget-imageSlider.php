@@ -84,14 +84,14 @@ $pbSliderPause = $this_widget_imageSlider['pbSliderPause'];
 
     if (isset($slideHeadingStyles['slideHeadingFontFamily']) ) {
       $slideHeadingFontFamily = str_replace('+', ' ', $slideHeadingStyles['slideHeadingFontFamily']);
-      array_push($thisColFontsToLoad, $this_widget_menu_content['pbMenuFontFamily']);
+      array_push($thisColFontsToLoad, $slideHeadingStyles['slideHeadingFontFamily']);
     } else{
       $slideHeadingFontFamily = ' none';
     }
 
     if (isset($slideDescStyles['slideDescFontFamily']) ) {
       $slideDescFontFamily = str_replace('+', ' ', $slideDescStyles['slideDescFontFamily']);
-      array_push($thisColFontsToLoad, $this_widget_menu_content['pbMenuFontFamily']);
+      array_push($thisColFontsToLoad, $slideDescStyles['slideDescFontFamily']);
 
     } else{
       $slideDescFontFamily = ' none';
@@ -99,7 +99,7 @@ $pbSliderPause = $this_widget_imageSlider['pbSliderPause'];
 
     if (isset($slideButtonStyles['slideButtonBtnFontFamily']) ) {
       $slideButtonBtnFontFamily = str_replace('+', ' ', $slideButtonStyles['slideButtonBtnFontFamily']);
-      array_push($thisColFontsToLoad, $this_widget_menu_content['pbMenuFontFamily']);
+      array_push($thisColFontsToLoad, $slideButtonStyles['slideButtonBtnFontFamily']);
     } else{
       $slideButtonBtnFontFamily = ' none';
     }

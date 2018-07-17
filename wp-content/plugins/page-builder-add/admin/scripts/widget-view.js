@@ -66,7 +66,7 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
         default : textc = 'No Widget Selected';     var texta = 'Drag a widget or extension and drop it here to use it.'; var textb = " ";  break;
       }
 
-    $(this.el).append('<p class="widget-area-'+this.model.cid+'" style="margin-top:-45px; font-size:14px;"> <i style="font-size:28px; color:#40AFF9;" class="fa '+texta+'"></i> <br>'+textc+' <br> '+textb+'</p> <div style=" display:none;margin-top:-3px; margin-right:5px; "  class="wdt-edit-controls"><div class="btn btn-red remove-widgets" id="widgetDelete" " ><span class="dashicons dashicons-trash"></span></div><div id="widgetEdit" class="btn editWidget-'+this.model.cid+'" "> <span class="dashicons dashicons-edit"></span></div><div id="widgetDuplicate" class="btn" "> <span class="dashicons dashicons-admin-page"></span></div> <div class="pbHandle btn" style="background:#2D3C3C;"><span class="dashicons dashicons-move"></span></div> <div id="updateWidgetTemplate" class="pb_hidden" data-thisWidgetCid="'+this.model.cid+'"  data-selected_widget_template=""></div>  </div>  <input type="text" name="widget-type" class="bp_hidden" style="display:none"  data-widgetType-id="'+this.model.cid+'" value="'+widgetType+'">');
+    $(this.el).append('<p class="widget-area-'+this.model.cid+'" style="margin-top:-45px; font-size:14px;"> <i style="font-size:28px; color:#40AFF9;" class="fa '+texta+'"></i> <br>'+textc+' <br> '+textb+'</p> <div style=" display:none;margin-top:-3px; margin-right:5px; "  class="wdt-edit-controls"><div class="btn btn-red remove-widgets" id="widgetDelete" " ><span class="dashicons dashicons-trash"></span></div><div id="widgetEdit" class="btn editWidget-'+this.model.cid+'" "> <span class="dashicons dashicons-edit"></span></div><div id="widgetDuplicate" class="btn" "> <span class="dashicons dashicons-admin-page"></span></div>  <div id="updateWidgetTemplate" class="pb_hidden" data-thisWidgetCid="'+this.model.cid+'"  data-selected_widget_template=""></div>  </div>  <input type="text" name="widget-type" class="bp_hidden" style="display:none"  data-widgetType-id="'+this.model.cid+'" value="'+widgetType+'">');
 
     $('.wdt-droppable').mouseover(function(ev){
         $(ev.target).children(' .wdt-edit-controls').css('display','block');
@@ -83,11 +83,18 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
     ColcurrentEditableRowID = jQuery('.ColcurrentEditableRowID').val();
     currentEditableColId = jQuery('.currentEditableColId').val();
     jQuery('section[rowid="'+ColcurrentEditableRowID+'"]').children('.ulpb_column_controls'+currentEditableColId).children('#editColumnSave').click();
+    jQuery('#'+pageBuilderApp.currentlyEditedColId).children('.wdgt-colChange').click();
     //alert('deleted');
   },
   EditWidget: function () {
     $('.lpp_modal_2').show('slide',{ direction : 'left' },500);  
     var this_widget_type = $('input[data-widgetType-id="'+this.model.cid+'"]').val();
+
+    thisWidgetIndex = pageBuilderApp.widgetList.indexOf(this.model);
+    if (pageBuilderApp.currentlyEditedWidgId != thisWidgetIndex) {
+      pageBuilderApp.currentlyEditedWidgId = thisWidgetIndex
+    }
+    
 
     //console.log( JSON.stringify(this.model.attributes ) );
 
@@ -126,7 +133,32 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
     $('.widgetBoxShadowBlur').val(this.model.get('widgetBoxShadowBlur'));
     $('.widgetBoxShadowColor').val(this.model.get('widgetBoxShadowColor'));
 
+    widgetborderRadius = this.model.get('borderRadius');
+    widgetborderWidth = this.model.get('borderWidth');
 
+    if (typeof(widgetborderRadius) != 'undefined' && widgetborderRadius != null) {
+      $('.wbrt').val(widgetborderRadius['wbrt'] );
+      $('.wbrb').val(widgetborderRadius['wbrb'] );
+      $('.wbrl').val(widgetborderRadius['wbrl'] );
+      $('.wbrr').val(widgetborderRadius['wbrr'] );
+    }else{
+      $('.wbrt').val( this.model.get('widgetBorderRadius') );
+      $('.wbrb').val( this.model.get('widgetBorderRadius') );
+      $('.wbrl').val( this.model.get('widgetBorderRadius') );
+      $('.wbrr').val( this.model.get('widgetBorderRadius') );
+    }
+    if (typeof(widgetborderWidth) != 'undefined' && widgetborderWidth != null) {
+      $('.wbwt').val(widgetborderWidth['wbwt'] );
+      $('.wbwb').val(widgetborderWidth['wbwb'] );
+      $('.wbwl').val(widgetborderWidth['wbwl'] );
+      $('.wbwr').val(widgetborderWidth['wbwr'] );
+    }else{
+      $('.wbwt').val( this.model.get('widgetBorderWidth') );
+      $('.wbwb').val( this.model.get('widgetBorderWidth') );
+      $('.wbwl').val( this.model.get('widgetBorderWidth') );
+      $('.wbwr').val( this.model.get('widgetBorderWidth') );
+    }
+    
 
     $('.widgetBgColor').parent().parent().siblings('.wp-color-result').children('.color-alpha').css('background',widgetBgColor);
     
@@ -1445,7 +1477,19 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
                 widgetBorderWidth: $('.widgetBorderWidth').val(),
                 widgetBorderStyle:$('.widgetBorderStyle').val(),
                 widgetBorderColor:$('.widgetBorderColor').val(),
-                widgetBorderRadius:$('.widgetBorderRadius').val(),
+                widgetBorderRadius: $('.widgetBorderRadius').val(),
+                borderRadius:{
+                  wbrt:$('.wbrt').val(),
+                  wbrb:$('.wbrb').val(),
+                  wbrl:$('.wbrl').val(),
+                  wbrr:$('.wbrr').val(),
+                },
+                borderWidth:{
+                  wbwt:$('.wbwt').val(),
+                  wbwb:$('.wbwb').val(),
+                  wbwl:$('.wbwl').val(),
+                  wbwr:$('.wbwr').val(),
+                },
                 widgetBoxShadowH: $('.widgetBoxShadowH').val(),
                 widgetBoxShadowV: $('.widgetBoxShadowV').val(),
                 widgetBoxShadowBlur: $('.widgetBoxShadowBlur').val(),
@@ -1558,10 +1602,17 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
              btnSelectedIcon = '';
             }
 
+            var btnLink = $('.btnLink').val();
+            if (btnLink != '#') {
+              if (!/^(f|ht)tps?:\/\//i.test(btnLink)) {
+                btnLink = "http://" + btnLink;
+              }
+            }
+
             this.model.set({
                 widgetButton:{
                   btnText: $('.btnText').val(),
-                  btnLink: $('.btnLink').val(),
+                  btnLink: btnLink,
                   btnTextColor: $('.btnColor').val(),
                   btnFontSize: $('.btnFontSize').val(),
                   btnFontSizeTablet:$('.btnFontSizeTablet').val(),
@@ -2252,7 +2303,7 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
                 }
             });
         break;
-        case 'wigt-pb-formBuilder':
+        case 'wigt-pb-formBuilder': 
 
             var pbFormBuilderAllFields = [];
 
@@ -2281,6 +2332,13 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
                 }else{
                  formBuilderbtnSelectedIcon = '';
                 }
+
+            var formSuccessActionURL = $('.formSuccessActionURL').val();
+            if (formSuccessActionURL != '#') {
+              if (!/^(f|ht)tps?:\/\//i.test(formSuccessActionURL)) {
+                formSuccessActionURL = "http://" + formSuccessActionURL;
+              }
+            }
 
             this.model.set({
                 widgetFormBuilder:{
@@ -2333,7 +2391,9 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
                     formEmailFormat: $('.formEmailFormat').val(),
                     formSuccessMessage: $('.formSuccessMessage').val(),
                     formSuccessAction:$('.formSuccessAction').val(),
-                    formSuccessActionURL:$('.formSuccessActionURL').val(),
+                    formSuccessActionURL:formSuccessActionURL,
+                    formSuccessCustomAction:$('.formSuccessCustomAction').val(),
+                    formFailureMessage: $('.formFailureMessage').val(),
                   },
                   widgetPbFbFormMailChimp: {
                     formBuilderEnableMailChimp: $('.formBuilderEnableMailChimp').val(),
@@ -2538,6 +2598,7 @@ pageBuilderApp.WidgetView = Backbone.View.extend({
       ColcurrentEditableRowID = jQuery('.ColcurrentEditableRowID').val();
         currentEditableColId = jQuery('.currentEditableColId').val();
         jQuery('section[rowid="'+ColcurrentEditableRowID+'"]').children('.ulpb_column_controls'+currentEditableColId).children('#editColumnSave').click();
+        jQuery('#'+pageBuilderApp.currentlyEditedColId).children('.wdgt-colChange').click();
 
         $('.isChagesMade').val('true');
   },

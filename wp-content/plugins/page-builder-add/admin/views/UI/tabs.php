@@ -2,7 +2,7 @@
       <?php if ( is_plugin_active( 'PluginOps-Extensions-Pack/extension-pack.php' ) ) {
         $goProLink = '';
       }else{
-        $goProLink = '<a href="https://pluginops.com/page-builder/?ref=editorBar" target="_blank" ><div class="goProButton"> Get Pro Version  <i class=" fa fa-unlock"></i> </div></a>';
+        $goProLink = '<a href="https://pluginops.com/page-builder/?ref=editorBar" target="_blank" ><div class="goProButton"> Want More Features ? </div></a>';
       } ?>
 <div class="tabs">
   <ul class="tab-links">

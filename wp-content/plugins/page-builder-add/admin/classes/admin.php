@@ -365,7 +365,7 @@ function load_admin_scripts( ) {
 
 	wp_register_script( 'ulpbExt_menu_old_forms_enqueue', ULPB_PLUGIN_URL.'/js/menu.js', array( 'jquery' ), false, true );
 
-	if ( is_plugin_active( 'page-builder-add-embed-anywhere-template-extension/page-builder-add-anywhere-template.php' ) || is_plugin_active( 'PluginOps-Extensions-Pack/extension-pack.php' ) ) {
+	if (  is_plugin_active( 'PluginOps-Extensions-Pack/extension-pack.php' ) ) {
 	  	$smfb_extension_pack_active = 'true';
 	}else{
 		$smfb_extension_pack_active = 'false';

@@ -90,10 +90,10 @@
         <br><br><hr><br><br><br>
 	</div>
     <div id="ims_cf3" class="tab"> 
-        <div class="pbp_form" style="background: #fff; padding:20px 10px 20px 25px; width: 99%;" >
+        <div class="pbp_form" style="background: #fff; padding:20px 0 20px 5px; width: 100%;" >
             <div class="PB_accordion">
                 <h3 class="handleHeader widgetOpsAccordionHandle">Headline </h3>
-                <div class="accordContentHolder">
+                <div class="accordContentHolder" style="background: #fff;">
                     <br>
                     <label>Text Color :</label>
                     <input type="text" class="color-picker_btn_two slideHeadingColor" id="slideHeadingColor" data-alpha='true' value='#333333' data-alpha='true'>
@@ -169,7 +169,7 @@
                     <input type="checkbox" id="slideHeadingUnderlined" class="slideHeadingUnderlined popb_checkbox">
                 </div>
                 <h3 class="handleHeader widgetOpsAccordionHandle">Description </h3>
-                <div class="accordContentHolder">
+                <div class="accordContentHolder" style="background: #fff;">
                     <br>
                     <label>Text Color :</label>
                     <input type="text" class="color-picker_btn_two slideDescColor" id="slideDescColor" data-alpha='true' value='#333333'>
@@ -245,7 +245,7 @@
                     <input type="checkbox" id="slideDescUnderlined" class="slideDescUnderlined popb_checkbox">
                 </div>
                 <h3 class="handleHeader widgetOpsAccordionHandle">Button </h3>
-                <div class="accordContentHolder">
+                <div class="accordContentHolder" style="background: #fff;">
                     <br>
                     <div>
                         <h4>Button Height 
@@ -348,7 +348,7 @@
                     <label>Border Color: </label>
                     <input type="text" class="color-picker_btn_two slideButtonBtnBorderColor" id="slideButtonBtnBorderColor" value='#ffffff'>
                     <br><br><hr><br>
-                    <label>Border Radius: </label>
+                    <label>Corner Radius: </label>
                     <input type="number" class="slideButtonBtnBorderRadius" max="100" min="0">
                     <br><br><hr><br>
                     <br>

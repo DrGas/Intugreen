@@ -59,6 +59,8 @@ if ($lp_thisPostType == 'ulpb_post') {
   $widgetOwlLoadScripts = false;
   $widgetWooCommLoadScripts = false;
   $widgetPostsSliderExternalScripts = false;
+  $widgetSubscribeFormWidget = false;
+  $shapesinluded = false;
 
 
   $POPBNallRowStyles = array();
@@ -264,18 +266,6 @@ if (!empty($data)) {
       array_push($POPBNallRowStylesResponsiveMobile, $thisRowResponsiveRowStylesMobile);
     }
 
-    /*
-    $rowMarginTop = floor( ($rowMarginTop/1268)*100);
-    $rowMarginBottom = floor( ($rowMarginBottom/1268)*100);
-    $rowMarginLeft = floor( ($rowMarginLeft/1268)*100);
-    $rowMarginRight = floor( ($rowMarginRight/1268)*100);
-
-    $rowPaddingTop = floor( ($rowPaddingTop/1268)*100);
-    $rowPaddingBottom = floor( ($rowPaddingBottom/1268)*100);
-    $rowPaddingLeft = floor( ($rowPaddingLeft/1268)*100);
-    $rowPaddingRight = floor( ($rowPaddingRight/1268)*100);
-    */
-
     $rowMarginStyle = "margin:$rowMarginTop"."% $rowMarginRight"."% $rowMarginBottom"."% $rowMarginLeft"."%;";
 
     $rowPaddingStyle = "padding:$rowPaddingTop"."% $rowPaddingRight"."% $rowPaddingBottom"."% $rowPaddingLeft"."%;";
@@ -296,41 +286,194 @@ if (!empty($data)) {
       <div class="overlay-row" style="<?php echo "$rowOverlayBackgroundOptions"; ?>"></div>
 
       <?php
-      if (isset($rowData['video'])) {
-        $rowVideo = $rowData['video'];
-        $rowBgVideoEnable = $rowVideo['rowBgVideoEnable'];
-        if ($rowBgVideoEnable == 'true') {
-          $rowBgVideoLoop = $rowVideo['rowBgVideoLoop'];
-          $rowVideoMpfour = $rowVideo['rowVideoMpfour'];
-          $rowVideoWebM = $rowVideo['rowVideoWebM'];
-          $rowVideoThumb = $rowVideo['rowVideoThumb'];
-          ?>
-          <video poster="<?php echo $rowVideoThumb; ?>" id="bgVid-<?php echo $row["rowID"]; ?>" playsinline autoplay muted <?php echo $rowBgVideoLoop; ?> >
-            <source src="<?php echo $rowVideoWebM; ?>" type="video/webm">
-            <source src="<?php echo $rowVideoMpfour; ?>" type="video/mp4">
-            </video>
-            <style type="text/css">
-            #bgVid-<?php echo $row["rowID"]; ?> { 
-              position: absolute;
-              min-width: 100%;
-              min-height: 100%;
-              width: auto;
-              height: auto;
-              z-index: -100;
-              background: url('<?php echo $rowVideoThumb; ?>') no-repeat;
-              background-size: cover;
-              transition: 1s opacity;
-          }
-          </style>
 
-          <?php
+      if (isset($rowData['bgSTop']) ) {
+        $bgSTop = $rowData['bgSTop'];
+        $bgShapeTop = '';
+        $rowID = $row["rowID"];
+        $positionID  = 'top';
+        $shapeType = $bgSTop['rbgstType'];
+        if ($shapesinluded == false) {
+          include_once 'svgShapes.php';
+          $shapesinluded = true;
         }
-        
-      }
-      ?>
-      
-  	<?php include('columns.php'); ?>
 
+        $invertTransform = '';
+        if ($shapeType == 'random' ) {
+          $invertTransform = 'transform:rotate(180deg);';
+        }
+
+        if (function_exists('bgSvgShapesRenderCode') ) {
+          $bgShapesArray = bgSvgShapesRenderCode($rowID, $positionID, $shapeType);
+          $bgShapeTop = $bgShapesArray['shape'];
+          $vieBoxAttr = $bgShapesArray['shapeAttr'];
+        }
+
+        $renderredHTML = '';
+        $returnScripts = '';
+
+        
+        if ($bgSTop != 'false') {
+          $isFlipped = '';
+          if ($bgSTop['rbgstFlipped'] == 'true') {
+            $isFlipped = 'transform:rotateY(180deg);';
+          }
+
+          if ($bgSTop['rbgstType'] == 'none') {
+            $bgShapeTop = '';
+          }
+          $onFront = '';
+          if ($bgSTop['rbgstFront'] == 'true') {
+            $onFront = 'z-index:2;'; 
+          }
+
+          if ($bgShapeTop != '') {
+
+            $renderredShapeHTML = 
+            '<div class="bgShapes bgShapeTop-'.$row["rowID"].'"  style="overflow: hidden; position: absolute; left: 0; width: 100%; direction: ltr; top: -1px; text-align:center; '.$onFront.' '.$invertTransform.' ">'.
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'.$vieBoxAttr.'" preserveAspectRatio="none" style="width: calc('.$bgSTop['rbgstWidth'].'% + 1.5px); height: '.$bgSTop['rbgstHeight'].'px;  position: relative; '.$isFlipped.'" >'.
+                $bgShapeTop.
+              '</svg>'.
+            ' <style>  .po-top-path-'.$row["rowID"].' { fill:'.$bgSTop['rbgstColor'].'; } </style> </div>  ';
+
+            echo "$renderredShapeHTML";
+
+            $thisShapeResponsiveTablet = "
+              .bgShapeTop-".$row["rowID"]." svg {
+                width: calc(".$bgSTop['rbgstWidtht']."% + 1.5px) !important;
+                height:".$bgSTop['rbgstHeightt']."px !important;
+              }
+            ";
+
+            $thisShapeResponsiveMobile = "
+              .bgShapeTop-".$row["rowID"]." svg {
+                width: calc(".$bgSTop['rbgstWidthm']."% + 1.5px) !important;
+                height:".$bgSTop['rbgstHeightm']."px !important;
+              }
+            ";
+            array_push($POPBNallRowStylesResponsiveTablet, $thisShapeResponsiveTablet);
+            array_push($POPBNallRowStylesResponsiveMobile, $thisShapeResponsiveMobile);
+
+
+          }
+        }
+
+      }
+
+      if (isset($rowData['bgSBottom']) ) {
+        $bgSBottom = $rowData['bgSBottom'];
+        $bgShapeBottom = '';
+        $rowID = $row["rowID"];
+        $positionID  = 'bottom';
+        $shapeType = $bgSBottom['rbgsbType'];
+        if ($shapesinluded == false) {
+          include_once 'svgShapes.php';
+          $shapesinluded = true;
+        }
+
+        $invertTransform = '';
+        if ($shapeType == 'random' ) {
+          $invertTransform = 'transform:rotate(0deg);';
+        }
+
+        if (function_exists('bgSvgShapesRenderCode') ) {
+          $bgShapesArray = bgSvgShapesRenderCode($rowID, $positionID, $shapeType);
+          $bgShapeBottom = $bgShapesArray['shape'];
+          $vieBoxAttr = $bgShapesArray['shapeAttr'];
+        }
+
+        $renderredHTML = '';
+        $returnScripts = '';
+
+        
+        if ($bgSBottom != 'false') {
+          $isFlipped = '';
+          if ($bgSBottom['rbgsbFlipped'] == 'true') {
+            $isFlipped = 'transform:rotateY(180deg);';
+          }
+
+          if ($bgSBottom['rbgsbType'] == 'none') {
+            $bgShapeBottom = '';
+          }
+          $onFront = '';
+          if ($bgSBottom['rbgsbFront'] == 'true') {
+            $onFront = 'z-index:2;'; 
+          }
+
+          if ($bgShapeBottom != '') {
+
+            $renderredShapeHTML = 
+            '<div class="bgShapes bgShapeBottom-'.$row["rowID"].'"  style="overflow: hidden; position: absolute; left: 0; width: 100%; direction: ltr;  bottom: -1px; transform: rotate(180deg); text-align:center; '.$onFront.' '.$invertTransform.' ">'.
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'.$vieBoxAttr.'" preserveAspectRatio="none" style="width: calc('.$bgSBottom['rbgsbWidth'].'% + 1.5px); height: '.$bgSBottom['rbgsbHeight'].'px;  position: relative; '.$isFlipped.'" >'.
+                $bgShapeBottom.
+              '</svg>'.
+            ' <style>  .po-bottom-path-'.$row["rowID"].' { fill:'.$bgSBottom['rbgsbColor'].'; } </style> </div>  ';
+
+            echo "$renderredShapeHTML";
+
+            $thisShapeResponsiveTablet = "
+              .bgShapeBottom-".$row["rowID"]." svg {
+                width: calc(".$bgSBottom['rbgsbWidtht']."% + 1.5px) !important;
+                height:".$bgSBottom['rbgsbHeightt']."px !important;
+              }
+            ";
+
+            $thisShapeResponsiveMobile = "
+              .bgShapeBottom-".$row["rowID"]." svg {
+                width: calc(".$bgSBottom['rbgsbWidthm']."% + 1.5px) !important;
+                height:".$bgSBottom['rbgsbHeightm']."px !important;
+              }
+            ";
+            array_push($POPBNallRowStylesResponsiveTablet, $thisShapeResponsiveTablet);
+            array_push($POPBNallRowStylesResponsiveMobile, $thisShapeResponsiveMobile);
+
+
+          }
+        }
+
+      }
+
+      ?>
+
+      
+
+        <?php
+        if (isset($rowData['video'])) {
+          $rowVideo = $rowData['video'];
+          $rowBgVideoEnable = $rowVideo['rowBgVideoEnable'];
+          if ($rowBgVideoEnable == 'true') {
+            $rowBgVideoLoop = $rowVideo['rowBgVideoLoop'];
+            $rowVideoMpfour = $rowVideo['rowVideoMpfour'];
+            $rowVideoWebM = $rowVideo['rowVideoWebM'];
+            $rowVideoThumb = $rowVideo['rowVideoThumb'];
+            ?>
+            <video poster="<?php echo $rowVideoThumb; ?>" id="bgVid-<?php echo $row["rowID"]; ?>" playsinline autoplay muted <?php echo $rowBgVideoLoop; ?> >
+              <source src="<?php echo $rowVideoWebM; ?>" type="video/webm">
+              <source src="<?php echo $rowVideoMpfour; ?>" type="video/mp4">
+              </video>
+              <style type="text/css">
+              #bgVid-<?php echo $row["rowID"]; ?> { 
+                position: absolute;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                z-index: -100;
+                background: url('<?php echo $rowVideoThumb; ?>') no-repeat;
+                background-size: cover;
+                transition: 1s opacity;
+            }
+            </style>
+
+            <?php
+          }
+          
+        }
+        ?>
+      
+  	   <?php include('columns.php'); ?>
+
+      
   	</div>
   	<?php 
     $rowCount++;
@@ -404,7 +547,7 @@ jQuery(document).ready(function(){
   
 </script>
 
-<?php  echo  '<script type="text/javascript">  jQuery(window).scroll(function(event) {  '.   $widgetAnimationTriggerScript  . "  }); </script>  \n" ; ?>
+<?php  echo  '<script type="text/javascript">   '.   $widgetAnimationTriggerScript  . "    jQuery(window).scroll();</script>  \n" ; ?>
 
 <?php
 

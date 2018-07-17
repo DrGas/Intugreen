@@ -117,13 +117,29 @@
           }
 
 
-          if (isset($thisWidget['widgetBorderWidth'])) {
+          if (isset($thisWidget['widgetBoxShadowH'])) {
             $widgetBorderRadius = '';
             if (isset($thisWidget['widgetBorderRadius'])) {
               $widgetBorderRadius = 'border:'.$thisWidget['widgetBorderRadius'].';';
             }
+
+            if ( isset($thisWidget['borderRadius']) ) {
+              $WborderRadius = $thisWidget['borderRadius'];
+              $widgetBorderRadius = 'border-radius:'.$WborderRadius['wbrt'].'px '.$WborderRadius['wbrr'].'px '.$WborderRadius['wbrb'].'px '.$WborderRadius['wbrl'].'px;';
+            }
+
+            if ( isset($thisWidget['borderWidth']) ) {
+              $widgetBorderWidth = $thisWidget['borderWidth'];
+            }else{
+              $widgetBorderWidth = array();
+              $widgetBorderWidth['wbwt'] = $thisWidget['widgetBorderWidth'];
+              $widgetBorderWidth['wbwb'] = $thisWidget['widgetBorderWidth'];
+              $widgetBorderWidth['wbwl'] = $thisWidget['widgetBorderWidth'];
+              $widgetBorderWidth['wbwr'] = $thisWidget['widgetBorderWidth'];
+            }
+
             
-            $this_widget_border_shadow = 'border: '.$thisWidget['widgetBorderWidth'].'px  '.$thisWidget['widgetBorderStyle'].' '.$thisWidget['widgetBorderColor'].'; box-shadow: '.$thisWidget['widgetBoxShadowH'].'px  '.$thisWidget['widgetBoxShadowV'].'px  '.$thisWidget['widgetBoxShadowBlur'].'px '.$thisWidget['widgetBoxShadowColor'].' ; '.$widgetBorderRadius.' ';
+            $this_widget_border_shadow = 'border-width: '.$widgetBorderWidth['wbwt'].'px '.$widgetBorderWidth['wbwr'].'px  '.$widgetBorderWidth['wbwb'].'px '.$widgetBorderWidth['wbwl'].'px; border-style: '.$thisWidget['widgetBorderStyle'].'; border-color: '.$thisWidget['widgetBorderColor'].'; box-shadow: '.$thisWidget['widgetBoxShadowH'].'px  '.$thisWidget['widgetBoxShadowV'].'px  '.$thisWidget['widgetBoxShadowBlur'].'px '.$thisWidget['widgetBoxShadowColor'].' ; '.$widgetBorderRadius.' ';
           }else{
             $this_widget_border_shadow = '';
           }
@@ -380,26 +396,7 @@
               $btnBorderWidth = $this_widget_btn_content['btnBorderWidth'];
               $btnBorderRadius = $this_widget_btn_content['btnBorderRadius'];
               
-              $POPB_verify_clicked_el = wp_create_nonce( 'POPB_verify_clicked_el' );
-              $this_btn_click_detectionAJAX_url = admin_url('admin-ajax.php?action=ulpb_cta_click_conversion_record&pID='.$current_pageID.'&POPB_CTA_Nonce='.$POPB_verify_clicked_el );
               $this_btn_click_detectionScript = "
-                <script>
-                jQuery( '#btnLink-$randomBtnClass' ).click(function(e) {
-                  $btnpreventDefault 
-                  var clickedLink = jQuery( this ).attr( 'href' );
-                  jQuery.ajax({
-                    url: '$this_btn_click_detectionAJAX_url',
-                    type: 'POST',
-                    data: 'result',
-                    error: function(){},
-                    success: function(msg){},
-                    beforeSend: function() {},
-                    complete: function() { 
-                        $btnredirectToLink
-                    }
-                  });
-                });
-                </script> 
                 <style> .btn-$randomBtnClass:hover{ background-color: $btnHoverBgColor !important; background: $btnHoverBgColor !important; color:$btnHoverTextColor !important; transition: all .5s;}  </style>
                 ";
               $this_widget_btn = "<br>
@@ -925,7 +922,7 @@
               $shortCodeInput = $this_widget_shortcode['shortCodeInput'];
               $widgetContent = do_shortcode( $shortCodeInput );
               $contentAlignment = ' ';
-              break;
+            break;
             case 'wigt-pb-countdown':
               
               $this_widget_countdown = $thisWidget['widgetCowntdown'];
@@ -1327,26 +1324,7 @@
               $btnBorderWidth = $this_widget_pricing['pricingbtnBorderWidth'];
               $btnBorderRadius = $this_widget_pricing['pricingbtnBorderRadius'];
               
-              $POPB_verify_clicked_el = wp_create_nonce( 'POPB_verify_clicked_el' );
-              $this_btn_click_detectionAJAX_url = admin_url('admin-ajax.php?action=ulpb_cta_click_conversion_record&pID='.$current_pageID.'&POPB_CTA_Nonce='.$POPB_verify_clicked_el );
               $this_btn_click_detectionScript = "
-                <script>
-                jQuery( '#btnLink-$randomBtnClass' ).click(function(e) {
-                  $btnpreventDefault 
-                  var clickedLink = jQuery( this ).attr( 'href' );
-                  jQuery.ajax({
-                    url: '$this_btn_click_detectionAJAX_url',
-                    type: 'POST',
-                    data: 'result',
-                    error: function(){},
-                    success: function(msg){},
-                    beforeSend: function() {},
-                    complete: function() { 
-                        $btnredirectToLink
-                    }
-                  });
-                });
-                </script> 
                 <style> .btn-$randomBtnClass:hover{ background-color: $btnHoverBgColor !important; background: $btnHoverBgColor !important; color:$btnHoverTextColor !important; transition: all .5s;}  </style>
                 ";
               $this_widget_btn = "<br>
@@ -1537,7 +1515,7 @@
                 $iconListTextSize = $this_widget_icon_list['iconListTextSize'];
                 $iconListTextIndent = $this_widget_icon_list['iconListTextIndent'];
                 $iconListTextColor = $this_widget_icon_list['iconListTextColor'];
-                
+                $pbIconListUniqueId = 'pb_IconList_'.(rand(10,99)*120+200);
 
                 if (isset($this_widget_icon_list['iconListItemLinkOpen'])) {
                   $iconListItemLinkOpen = $this_widget_icon_list['iconListItemLinkOpen'];
@@ -1583,7 +1561,6 @@
                 $pbIconListAllItems = '';
 
                 ob_start();
-                  $pbIconListUniqueId = 'pb_IconList_'.(rand(10,99)*120+200);
 
                   echo "\n <ul id='$pbIconListUniqueId' > \n";
 
@@ -1803,15 +1780,19 @@
             ob_start();
 
           echo "
+          jQuery('#".$row["rowID"]."-$Columni > .widget-$j' ).css('opacity','0');
+          jQuery(window).scroll(function(event) { 
               jQuery('#".$row["rowID"]."-$Columni > .widget-$j' ).each( function(i, el){
                 var el = ".'$(el);'."
                 if (el.visible(true)) {
                   setTimeout(function(){
+                    jQuery('#".$row["rowID"]."-$Columni > .widget-$j' ).css('opacity','1');
                     el.addClass('$widgetAnimation');
-                  },2000);
+                  },200);
                   
                 }
               });
+          });
           ";
 
           $thisWidgetAnimationTrigger =  ob_get_contents();

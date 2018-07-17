@@ -3,7 +3,7 @@ pageBuilderApp.rowList = new pageBuilderApp.RowCollection();
 pageBuilderApp.widgetList = new pageBuilderApp.WidgetCollection();
 pageBuilderApp.PageBuilderModel = new pageBuilderApp.ULPBPage();
 
-var row = new pageBuilderApp.Row();
+pageBuilderApp.row = new pageBuilderApp.Row();
 var widget = new pageBuilderApp.ColWidget();
 //var savedPage = pageBuilderApp.PageBuilderModel.fetch();
 pageBuilderApp.PageBuilderModel.fetch({

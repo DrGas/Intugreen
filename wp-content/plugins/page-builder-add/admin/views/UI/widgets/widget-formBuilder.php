@@ -17,12 +17,12 @@ if ($pbp_is_MCextensionActive == true) {
 
 ?>
 <div class="tabs" style="width: 99%; min-width: 400px;">
-  <ul class="tab-links">
+  <ul class="tab-links formBuilderTabs">
     <li class="active" style="margin: 0;"><a href="#formBuilderTab_cf1" class="tab_link">Fields</a></li>
     <li style="margin: 0;"><a href="#formBuilderTab_cf2" class="tab_link">Field Styles</a></li>
     <li style="margin: 0;"><a href="#formBuilderTab_cf3" class="tab_link">Button Styles</a></li>
-    <li style="margin: 0;"><a href="#formBuilderTab_cf4" class="tab_link">Email</a></li>
-    <li style="margin: 0;"><a href="#formBuilderTab_cf5" class="tab_link">Integrations</a></li>
+    <li style="margin: 0; "><a href="#formBuilderTab_cf5" class="tab_link">Integrations</a></li>
+    <li style="margin: 0;"><a href="#formBuilderTab_cf6" class="tab_link"> Actions </a></li>
   </ul>
 <div class="tab-content" style="box-shadow:none;" >
     <div id="formBuilderTab_cf1" class="tab active">
@@ -92,7 +92,7 @@ if ($pbp_is_MCextensionActive == true) {
             <label>Border Width : </label>
             <input type="number" class="formBuilderFieldBorderWidth">
             <br><br><hr><br>
-            <label>Border Radius : </label>
+            <label>Corner Radius : </label>
             <input type="number" class="formBuilderFieldBorderRadius">
             <br>
             <br>
@@ -174,7 +174,7 @@ if ($pbp_is_MCextensionActive == true) {
             <label>Border Color: </label>
             <input type="text" class="color-picker_btn_two formBuilderBtnBorderColor" id="formBuilderBtnBorderColor" value='#ffffff'>
             <br><br><hr><br>
-            <label>Border Radius: </label>
+            <label>Corner Radius: </label>
             <input type="number" class="formBuilderBtnBorderRadius" max="100" min="0">
             <br><br><hr><br>
             <label>Alignment :</label>
@@ -218,56 +218,11 @@ if ($pbp_is_MCextensionActive == true) {
             <br>
         </div>
     </div>
-    <div id="formBuilderTab_cf4" class="tab">
-        <div class="pbp_form" style="background: #fff; padding:20px 10px 20px 25px; width: 99%;" >
-            <br>
-            <label>Form Name :</label>
-            <input type="text" class="formEmailformName">
-            <br><br><hr><br>
-            <label>Email To :</label>
-            <input type="text" class="formEmailTo">
-            <br><br><hr><br>
-            <label>Email Subject :</label>
-            <input type="text" class="formEmailSubject">
-            <label style="display: none;">From Email :</label>
-            <input type="hidden" class="formEmailFromEmail">
-            <br><br><hr><br>
-            <label>Email From Name :</label>
-            <input type="text" class="formEmailName">
-            <br><br><hr><br>
-            <label>Email Format :</label>
-            <select class="formEmailFormat">
-                <option value="plain">Plain Text</option>
-                <option value="HTML">HTML</option>
-            </select>
-            <br><br><hr><br>
-            <label>Success Action :</label>
-            <select class="formSuccessAction">
-                <option value="showMessage">Show Message</option>
-                <option value="redirect">Redirect To URL</option>
-            </select>
-            <br><br><hr><br>
-            <div class="successFormActionCont" style="display: none;">
-                <label>Redirect URL <span style="font-size:10px">(With http://)</span></label>
-                <input type="url" class="formSuccessActionURL" placeholder="URL">
-                <br><br><hr><br>
-            </div>
-            <label>Success Message :</label>
-            <input type="text" class="formSuccessMessage">
-            <br><br><hr><br>
-            <label>Allow Duplicates : </label>
-            <select class="widgetPbFbFormAllowDuplicates">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select>
-            <br><br><hr><br><br><br>
-        </div>
-    </div>
     <div id="formBuilderTab_cf5" class="tab">
         <div class="pbp_form" style="background: #fff; padding:20px 10px 20px 25px; width: 99%;" >
+
             <?php  
                 if (function_exists('ulpb_prem_extension_integrations_form_builder')) {
-                    ulpb_prem_extension_integrations_form_builder();               
                 } else{
                     echo '
                     <br>
@@ -283,10 +238,82 @@ if ($pbp_is_MCextensionActive == true) {
                         <option value="" disabled="disabled">Drip (Pro Only)</option>
                         <option value="" disabled="disabled">ConvertKit (Pro Only)</option>
                     </select>
-                    <br><br><br><br><br><hr><br>';
+                    <br><br><br><hr><br>';
                 }
 
             ?>
+
+            <div class="PB_accordion" style="width:90% !important;">
+                <h4>Email Notification</h4>
+                <div class="pbp_form" style="background: #fff; padding:20px 10px 20px 25px; width: 99%;" >
+                    <br>
+                    <label>Form Name :</label>
+                    <input type="text" class="formEmailformName">
+                    <br><br><hr><br>
+                    <label>Email To :</label>
+                    <input type="text" class="formEmailTo">
+                    <br><br><hr><br>
+                    <label>Email Subject :</label>
+                    <input type="text" class="formEmailSubject">
+                    <label style="display: none;">From Email :</label>
+                    <input type="hidden" class="formEmailFromEmail">
+                    <br><br><hr><br>
+                    <label>Email From Name :</label>
+                    <input type="text" class="formEmailName">
+                    <br><br><hr><br>
+                    <label>Email Format :</label>
+                    <select class="formEmailFormat">
+                        <option value="plain">Plain Text</option>
+                        <option value="HTML">HTML</option>
+                    </select>
+                    <br><br><hr><br>
+                    <label>Error Message :</label>
+                    <input type="text" class="formErrorMessage">
+                    <br><br><hr><br>
+                    <label>Allow Duplicates : </label>
+                    <select class="widgetPbFbFormAllowDuplicates">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <br><br><hr><br><br>
+                </div>
+            </div>
+            <?php  
+                if (function_exists('ulpb_prem_extension_integrations_form_builder')) {
+                    ulpb_prem_extension_integrations_form_builder();               
+                } else{
+
+                }
+            ?>
+        </div>
+    </div>
+    <div id="formBuilderTab_cf6" class="tab">
+        <div class="PB_accordion" style="width:100% !important;">
+            <h4>Success Actions</h4>
+            <div class="pbp_form" style="background: #fff; padding:20px 10px 20px 25px; width: 99%;" >
+                <label>Success Action :</label>
+                <select class="formSuccessAction">
+                    <option value="showMessage">Show Message</option>
+                    <option value="redirect">Redirect To URL</option>
+                </select>
+                <br><br><hr><br>
+                <div class="successFormActionCont" style="display: none; background: #fff;">
+                    <label>Redirect URL <span style="font-size:10px">(With http://)</span></label>
+                    <input type="url" class="formSuccessActionURL" placeholder="URL">
+                    <br><br><hr><br>
+                </div>
+                <label>Success Message :</label> <br>
+                <input type="text" class="formSuccessMessage" style="width: 280px;">
+                <br><br><br><hr><br>
+                <label>Custom Action (Javascript)</label>
+                <textarea class="formSuccessCustomAction"  rows="7" style="width: 280px;"></textarea>
+            </div>
+            <h4>Failure Actions</h4>
+            <div class="pbp_form" style="background: #fff; padding:20px 10px 20px 25px; width: 99%;" >
+                <label>Failure Message :</label> <br>
+                <input type="text" class="formFailureMessage" style="width: 200px;">
+                <br><br><br><hr><br>
+            </div>
         </div>
     </div>
 </div>
@@ -352,3 +379,5 @@ if ($pbp_is_MCextensionActive == true) {
 
     })(jQuery);
 </script>
+
+<style type="text/css"> .formBuilderTabs li { font-size: 12px !important; } .accordContentHolder { overflow: auto !important; }</style>

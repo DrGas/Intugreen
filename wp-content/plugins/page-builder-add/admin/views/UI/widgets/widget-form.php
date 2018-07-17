@@ -104,7 +104,7 @@
         <label>Border Color: </label>
         <input type="text" class="color-picker_btn_two formBtnBorderColor" id="formBtnBorderColor" value='#ffffff'>
         <br><br><hr><br>
-        <label>Border Radius: </label>
+        <label>Corner Radius: </label>
         <input type="number" class="formBtnBorderRadius" max="100" min="0">
         <br><br><hr><br>
         <label>Button Font :</label>

@@ -1,10 +1,10 @@
-=== Landing Page - Landing Page Builder, Create Squeeze Page, Lead Page & landing page ===
+=== Landing Page - Create responsive landing pages ===
 Contributors: pluginops
 Tags: landing page, landing pages, landing page wordpress plugin, wordpress landing page plugin, landing page builder, landing page editor, aweber, mailchimp, drip, getresponse, activecampaign, zapier
 Requires at least: 3.4
 Tested up to: 4.9
 Donate link : http://pluginops.com/page-builder/
-Stable tag: 1.4.5.9
+Stable tag: 1.4.6.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,6 +166,14 @@ Yes, Please contact us at support[at]pluginops[dot]com and we will get back to y
 
 == Changelog ==
 
+= V 1.4.6.0 =  06-07-2018
+
+* New Feature : Row Background Shapes. 
+* New Feature : New Pricing Row Blocks. 
+* New Template : Added 5 more templates. 
+* Improvements : Double click on widget to edit it. 
+
+
 = V 1.4.5.9 =  13-06-2018
 
 * New Feature : Integration With Aweber. 
@@ -173,8 +181,8 @@ Yes, Please contact us at support[at]pluginops[dot]com and we will get back to y
 * New Feature : Integration With ConertKit. 
 * New Feature : New Form Builder Widget Blocks.
 * New Feature : New Pricing Table Row Blocks.999
-* Improvemnts : Row Edit Render delay decreased.
-* Improvemnts : Column Edit Render delay decreased.
+* Improvements : Row Edit Render delay decreased.
+* Improvements : Column Edit Render delay decreased.
 * Bug Fixed : Shortcode Widget not loading complete HTML. 
 * Bug Fixed : Posts Slider Widget wrong link.
 
@@ -395,6 +403,14 @@ Yes, Please contact us at support[at]pluginops[dot]com and we will get back to y
 
 
 == Upgrade Notice ==
+
+= V 1.4.6.0 =  06-07-2018
+
+* New Feature : Row Background Shapes. 
+* New Feature : New Pricing Row Blocks. 
+* New Template : Added 5 more templates. 
+* Improvements : Double click on widget to edit it. 
+
 
 = V 1.4.5.9 =  13-06-2018
 

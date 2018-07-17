@@ -120,7 +120,14 @@ function ulpb_admin_ajax(){
 					'post_status' => wp_strip_all_tags($pageStatus),           
 					'post_type' => "$postType"  
 				);
-				$post_id =  wp_insert_post($post);
+				
+				$checkIfPostExists = get_post_status($page_id);
+
+				if ($checkIfPostExists != false) {
+					$post_id =  wp_update_post($post);
+				} else{
+				 	$post_id =  wp_insert_post($post);
+				}
 
 				$rowCount = count($data['Rows']);
 

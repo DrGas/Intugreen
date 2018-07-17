@@ -366,7 +366,7 @@
                       <label>Border Color : </label>
                       <input type="text" id="colBorderColor" class="color-picker_btn_two  colBorderColor colOptionsFields">
                       <br>
-                      <label>Border Radius : </label>
+                      <label>Corner Radius : </label>
                       <input type="number" class="colBorderRadius colOptionsFields">px
                       <br>
                       <hr>
@@ -425,51 +425,23 @@
               <div class="tab-content" style="padding:10px 0px 15px 15px; background: #fff;">
                 <input type="text" class="pbSearchWidget" placeholder="Search a widget" style="width: 90%;">
                 <?php
-                    if (is_plugin_active( 'PluginOps-Extensions-Pack/extension-pack.php' ) ) {
+                    $proWidgetLoaded = false;
+                    if (is_plugin_active( 'PluginOps-Extensions-Pack/extension-pack.php' )  ) {
+                        if (function_exists('ulpb_available_pro_widgets') ) {
+                              ulpb_available_pro_widgets();
+                              $proWidgetLoaded = true;
+                        }
+                    }
+                    if($proWidgetLoaded == false) {
                         ?>
                           <div style="display: inline-block; width: 49%; float: left;">
                             <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-text"><i class="fa fa-text-width"></i> <br> Text Widget</div>
                             <div class="widget POPB_widget wdt-draggable" data-type="wigt-img"><i class="fa fa-picture-o"></i> <br> Image</div>
                             <div class="widget POPB_widget wdt-draggable" data-type="wigt-menu"><i class="fa fa-navicon"></i> <br> Menu</div>
                             <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-formBuilder"> <i class="fa fa-wpforms"></i> <br> Form Builder</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-video"> <i class="fa fa-video-camera"></i> <br>  Video</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-audio"> <i class="fa fa-file-audio-o"></i> <br>  Audio</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-shortcode"> <i class="fa fa-code"></i> <br> ShortCode</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-break"> <i class="fa fa-ellipsis-h"></i> <br> Break </div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-imageSlider"><i class="fa fa-file-image-o"></i> <br> Image Slider</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-pricing"><i class="fa fa-tags"></i> <br> Pricing</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-imgCarousel"><i class="fa fa-image"></i><i class="fa fa-image"></i>  <br> Image Carousel</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-iconList"> <i class="fa fa-list"></i> <br> Icon List</div>
-                            
-                          </div>
-                          <div style="display: inline-block; width: 49%;">
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-WYSIWYG"><i class="fa fa-file-text-o"></i> <br> Text Editor</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-btn-gen"><i class="fa fa-mouse-pointer"></i> <br> Button</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-form"> <i class="fa fa-envelope-o"></i> <br> Subscribe Form</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-postSlider"><i class="fa fa-file-image-o"></i> <br> Posts Slider</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-embededVideo"> <i class="fa fa-youtube-play"></i> <br> Embed Video </div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-icons"><i class="fa fa-fonticons"></i> <br> Icons</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-cards"><i class="fa fa-fonticons"></i> <br> Card</div>
-                            
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-testimonial"><i class="fa fa fa-quote-left"></i> <br> Testimonial</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-spacer"> <i class="fa fa-arrows-v"></i> <br> Spacer </div>
-
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-progressBar"><i class="fa fa-align-left"></i> <br> Progress Bar </div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-countdown"><i class="fa fa-sort-numeric-desc"></i> <br> Countdown</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-counter"> <i class="fa fa-sort-numeric-desc"></i> <br> Counter</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-wooCommerceProducts"> <i class="fa fa-shopping-cart"></i> <br> WooCommerce Products</div>
-                          </div>
-                        <?php 
-                    }else{
-                        ?>
-                          <div style="display: inline-block; width: 49%; float: left;">
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-text"><i class="fa fa-text-width"></i> <br> Text Widget</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-img"><i class="fa fa-picture-o"></i> <br> Image</div>
-                            <div class="widget POPB_widget wdt-draggable" data-type="wigt-menu"><i class="fa fa-navicon"></i> <br> Menu</div>
                             <div class="widget POPB_widget" data-type="wigt-video"> <i class="fa fa-video-camera"></i> <br>  Video</div>
                             <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-audio"> <i class="fa fa-file-audio-o"></i> <br>  Audio</div>
                             <div class="widget POPB_widget wdt-draggable" data-type="wigt-pb-break"> <i class="fa fa-ellipsis-h"></i> <br> Break </div>
-                            <div class="widget POPB_widget prem-widget" data-widgType="wigt-pb-formBuilder"> <i class="fa fa-wpforms"></i> <br> Form Builder <p>Pro Only</p></div>
                             <div class="widget POPB_widget prem-widget" data-widgType="wigt-pb-shortcode"> <i class="fa fa-code"></i> <br> ShortCode <p>Pro Only</p></div>
                             <div class="widget POPB_widget prem-widget" data-widgType="wigt-pb-imageSlider"><i class="fa fa-file-image-o"></i> <br> Image Slider <p>Pro Only</p></div>
                             <div class="widget POPB_widget prem-widget" data-widgType="wigt-pb-pricing"><i class="fa fa-tags"></i> <br> Pricing <p>Pro Only</p></div>
@@ -492,11 +464,10 @@
                             <div class="widget POPB_widget prem-widget" data-widgType="wigt-pb-counter"> <i class="fa fa-sort-numeric-desc"></i> <br> Counter <p>Pro Only</p></div>
                             <div class="widget POPB_widget prem-widget" data-widgType="wigt-pb-wooCommerceProducts"> <i class="fa fa-shopping-cart"></i> <br> WooCommerce Products <p>Pro Only</p></div>
                           </div>
+                          <br><br><br> <a href="https://pluginops.com/optin-builder/?ref=widgets" target="_blank" style="padding:5px 10px; text-decoration: none; font-size: 17px; text-align: center; color: #fff; background:#8BC34A; border-radius: 3px;"> Unlock All These Amazing Widgets </a> <br>
                         <?php
                     }
-
                 ?>
-                
 
                   <div style="display: inline-block; width: 49%; float: left;">
                     
