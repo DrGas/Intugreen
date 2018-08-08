@@ -15,7 +15,11 @@ h1, h2, h3, h4, h5, h6 {
 p {
 	font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 	color: #38393d;
-	font-weight: lighter;
+	font-weight: 200;
+}
+
+.coll-single .title-wrapper .title-text {
+	font-family: "Prata";
 }
 
 #yui_3_17_2_1_1529486280796_886 {
@@ -189,6 +193,99 @@ margin-right: 100px;
 
 .video-mission {
 
+}
+
+/*slider partners front page*/
+.wp-image-847 .wp-image-848 .wp-image-849 {
+	display: block;
+    margin-left: 100px;
+    margin-right: auto;
+    width: 50%;
+}
+/*preloader in projects*/
+.mfp-preloader {
+	background-image: url("intugreen_icon02.png");
+	background-repeat: no-repeat;
+	top: 20%;
+	border-radius: none;
+}
+
+
+/*blog section without date*/
+.coll-shortcode-blog .coll-section-divider {
+	display: none;
+}
+
+.comments {
+	display: none;
+}
+
+.fa-comment-o {
+	display: none;
+}
+
+.fa{
+	display: none;
+}
+
+.coll-single .title-wrapper .icons .link {
+	display: none;
+}
+
+.icons {
+	display: none;
+}
+
+.coll-section-divider > span.text {
+	display: none;
+}
+
+.coll-section-divider > span {
+	float: right;
+}
+
+.button-newsletter {
+	background-color: transparent;
+	border: 2px solid #007465;
+	color: black;
+	font-family: Lato; 
+	font-size: 14px;
+
+}
+
+.button-newsletter:hover {
+	background-color: #007465;
+	border: 2px solid #007465;
+	color: white;
+	padding: 50px;
+}
+
+.input-field-nws {
+	width: 40%;
+}
+
+.hello-world {
+	background-color: red;
+}
+
+/*vi udvikler text*/
+.vi-udvikler-text{
+	font-weight: lighter;
+}
+
+/*newsletter vi udvikler*/
+.newsletter-text {
+	margin-right: 20px;
+	margin-top: 10px;
+}
+
+
+.ds-points {
+	margin: 0 20px 0 20px;
+}
+
+.ds-kontakt {
+	margin: 0 0 0 20px;
 }
 
 /*MEDIA QUERIES*/
