@@ -196,12 +196,18 @@ margin-right: 100px;
 }
 
 /*slider partners front page*/
-.wp-image-847 .wp-image-848 .wp-image-849 {
-	display: block;
-    margin-left: 100px;
-    margin-right: auto;
-    width: 50%;
+.wp-image-847 {
+margin-left: 100px;
 }
+
+.wp-image-848 {
+	margin-left: 100px;
+	} 
+
+.wp-image-849 {
+	margin-left: 100px;
+}
+
 /*preloader in projects*/
 .mfp-preloader {
 	background-image: url("intugreen_icon02.png");
@@ -264,8 +270,8 @@ margin-right: 100px;
 	width: 40%;
 }
 
-.hello-world {
-	background-color: red;
+#hello-world {
+	color: blue;
 }
 
 /*vi udvikler text*/
@@ -286,6 +292,14 @@ margin-right: 100px;
 
 .ds-kontakt {
 	margin: 0 0 0 20px;
+}
+
+.vores-mission-text {
+	color: white;
+}
+
+.om-os-text {
+	margin: 0 100px;
 }
 
 /*MEDIA QUERIES*/
