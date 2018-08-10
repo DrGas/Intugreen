@@ -72,13 +72,13 @@ if ( have_posts() ) :
 			$outputD .= '<ul class="list">';
 			if ( ! empty( $client ) ) {
 				$outputD .= '<li class="client">';
-				$outputD .= '<h5 class="title">' . __( 'Client:', 'framework' ) . '</h5>';
+				$outputD .= '<h5 class="title">' . __( 'Klient:', 'framework' ) . '</h5>';
 				$outputD .= '<p class="text">' . $client . '</p>';
 				$outputD .= '</li>';
 			}
 			if ( ! empty( $role ) ) {
 				$outputD .= '<li class="role">';
-				$outputD .= '<h5 class="title">' . __( 'Our Role:', 'framework' ) . '</h5>';
+				$outputD .= '<h5 class="title">' . __( 'Vores Rolle:', 'framework' ) . '</h5>';
 				$outputD .= '<p class="text">' . $role . '</p>';
 				$outputD .= '</li>';
 			}
@@ -103,7 +103,7 @@ if ( have_posts() ) :
 						<h1 class="title-text"><?php the_title(); ?></h1>
 
 						<h3 class="subtitle-text"><?php the_excerpt(); ?></h3>
-						<ul class="icons">
+						<!--<ul class="icons">
 							<li><a class="link"
 							       target="_blank"
 							       href="http://twitter.com/share?url=<?php the_permalink(); ?>&amp;text=Currently reading <?php the_title(); ?>">
@@ -120,7 +120,7 @@ if ( have_posts() ) :
 							       target="_blank"
 							       href="javascript:void((function(){var e=document.createElement('script'); e.setAttribute('type','text/javascript'); e.setAttribute('charset','UTF-8'); e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)})());">
 									<i class="fa fa-pinterest"></i></a></li>
-						</ul>
+						</ul> -->
 					</div>
 				</div>
 			</div>
